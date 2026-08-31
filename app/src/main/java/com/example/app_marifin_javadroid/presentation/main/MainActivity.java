@@ -45,9 +45,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             } else if (itemId == R.id.navigation_add) {
                 startActivity(new Intent(this, AddEditTransactionActivity.class));
                 return false;
-            } else if (itemId == R.id.navigation_transaction) {
-                startActivity(new Intent(this, TransactionListActivity.class));
-                return false;
+            } else if (itemId == R.id.navigation_budget) {
+                loadFragment(new com.example.app_marifin_javadroid.presentation.budget.BudgetListFragment());
+                return true;
             } else if (itemId == R.id.navigation_profile) {
                 loadFragment(new ProfileFragment());
                 return true;

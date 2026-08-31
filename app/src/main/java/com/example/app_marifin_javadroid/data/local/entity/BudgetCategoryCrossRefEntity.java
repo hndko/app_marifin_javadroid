@@ -53,6 +53,11 @@ public class BudgetCategoryCrossRefEntity {
         this.allocatedAmount = allocatedAmount;
     }
 
+    @androidx.room.Ignore
+    public BudgetCategoryCrossRefEntity(@NonNull String budgetId, @NonNull String categoryId) {
+        this(budgetId, categoryId, BigDecimal.ZERO);
+    }
+
     @NonNull
     public String getBudgetId() { return budgetId; }
     public void setBudgetId(@NonNull String budgetId) { this.budgetId = budgetId; }

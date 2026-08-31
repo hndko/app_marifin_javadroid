@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.MariFin.CardView"
+    app:cardElevation="@dimen/elevation_low"
+    android:layout_marginHorizontal="@dimen/spacing_base"
+    android:layout_marginVertical="@dimen/spacing_xs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_base">
+
+        <!-- Top Row: Name & Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_budget_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Budget Makanan &amp; Kopi"
+                    android:textSize="@dimen/text_base"
+                    android:fontFamily="sans-serif-bold"
+                    android:textColor="@color/on_surface" />
+
+                <TextView
+                    android:id="@+id/tv_budget_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Periode: Bulanan"
+                    android:textSize="@dimen/text_xs"
+                    android:textColor="@color/gray_500"
+                    android:layout_marginTop="@dimen/spacing_2xs" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_budget_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aman (45%)"
+                android:textSize="@dimen/text_xs"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/income_green"
+                android:background="@drawable/bg_badge_primary"
+                android:paddingHorizontal="@dimen/spacing_sm"
+                android:paddingVertical="@dimen/spacing_2xs" />
+
+            <ImageButton
+                android:id="@+id/btn_budget_delete"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/gray_400"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:contentDescription="@string/action_delete"
+                android:tooltipText="@string/action_delete" />
+        </LinearLayout>
+
+        <!-- Progress Bar Indicator -->
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_budget_utilization"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:progress="45"
+            app:indicatorColor="@color/income_green"
+            app:trackColor="@color/gray_200"
+            app:trackCornerRadius="4dp"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_sm" />
+
+        <!-- Bottom Row: Spent vs Limit & Remaining -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_budget_spent_vs_limit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Terpakai: Rp450.000 / Rp1.000.000"
+                android:textSize="@dimen/text_xs"
+                android:textColor="@color/gray_700" />
+
+            <TextView
+                android:id="@+id/tv_budget_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sisa: Rp550.000"
+                android:textSize="@dimen/text_xs"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/primary" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

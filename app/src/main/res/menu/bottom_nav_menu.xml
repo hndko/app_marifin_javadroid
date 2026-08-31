@@ -16,9 +16,9 @@
         android:title="@string/nav_add" />
 
     <item
-        android:id="@+id/navigation_transaction"
-        android:icon="@drawable/ic_transfer"
-        android:title="@string/nav_transaction" />
+        android:id="@+id/navigation_budget"
+        android:icon="@drawable/ic_budget"
+        android:title="@string/nav_budget" />
 
     <item
         android:id="@+id/navigation_profile"

@@ -71,4 +71,26 @@ public interface SupabaseDataApi {
 
     @DELETE("rest/v1/transactions")
     Call<Void> deleteTransaction(@Query("id") String idFilter);
+
+    // Budgets
+    @GET("rest/v1/budgets?order=start_date.desc")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.BudgetDto>> getBudgets(
+            @Query("user_id") String userIdFilter
+    );
+
+    @Headers({"Content-Type: application/json", "Prefer: return=representation"})
+    @POST("rest/v1/budgets")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.BudgetDto>> insertBudget(
+            @Body com.example.app_marifin_javadroid.data.remote.dto.BudgetDto budget
+    );
+
+    @Headers({"Content-Type: application/json", "Prefer: return=representation"})
+    @PATCH("rest/v1/budgets")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.BudgetDto>> updateBudget(
+            @Query("id") String idFilter,
+            @Body com.example.app_marifin_javadroid.data.remote.dto.BudgetDto budget
+    );
+
+    @DELETE("rest/v1/budgets")
+    Call<Void> deleteBudget(@Query("id") String idFilter);
 }
