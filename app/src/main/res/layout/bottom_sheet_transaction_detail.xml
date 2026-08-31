@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_xl"
+    android:background="@drawable/bg_bottom_nav">
+
+    <!-- Handle Bar -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/gray_300"
+        android:layout_marginBottom="@dimen/spacing_base" />
+
+    <!-- Amount Header -->
+    <TextView
+        android:id="@+id/tv_detail_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp50.000"
+        android:textSize="@dimen/text_3xl"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/expense_red"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- Type Badge -->
+    <TextView
+        android:id="@+id/tv_detail_type_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pengeluaran"
+        android:textSize="@dimen/text_xs"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/gray_600"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/spacing_2xs"
+        android:layout_marginBottom="@dimen/spacing_lg" />
+
+    <!-- Info Breakdown Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MariFin.CardView"
+        app:contentPadding="@dimen/spacing_base"
+        android:layout_marginBottom="@dimen/spacing_base">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Date Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/spacing_xs">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tanggal"
+                    android:textColor="@color/gray_500"
+                    android:textSize="@dimen/text_sm" />
+
+                <TextView
+                    android:id="@+id/tv_detail_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01 Sep 2026, 12:30 WIB"
+                    android:textColor="@color/on_surface"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="@dimen/text_sm" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
+            <!-- Account Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/spacing_xs">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rekening"
+                    android:textColor="@color/gray_500"
+                    android:textSize="@dimen/text_sm" />
+
+                <TextView
+                    android:id="@+id/tv_detail_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blu by BCA Digital"
+                    android:textColor="@color/on_surface"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="@dimen/text_sm" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
+            <!-- Category / Description Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/spacing_xs">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Kategori / Catatan"
+                    android:textColor="@color/gray_500"
+                    android:textSize="@dimen/text_sm" />
+
+                <TextView
+                    android:id="@+id/tv_detail_notes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Makan Siang &amp; Kopi"
+                    android:textColor="@color/on_surface"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="@dimen/text_sm" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Delete Button (Icon + Text) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete_transaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Transaksi"
+        app:icon="@drawable/ic_logout"
+        style="@style/Widget.MariFin.Button.Outlined"
+        android:textColor="@color/expense_red"
+        app:iconTint="@color/expense_red"
+        app:strokeColor="@color/expense_red"
+        android:layout_marginTop="@dimen/spacing_sm" />
+
+</LinearLayout>

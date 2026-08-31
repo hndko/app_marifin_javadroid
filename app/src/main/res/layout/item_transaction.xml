@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.MariFin.CardView"
+    app:cardElevation="@dimen/elevation_low"
+    android:layout_marginHorizontal="@dimen/spacing_base"
+    android:layout_marginVertical="@dimen/spacing_2xs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_base">
+
+        <!-- Number Column -->
+        <TextView
+            android:id="@+id/tv_tx_number_seq"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textColor="@color/gray_400"
+            android:textSize="@dimen/text_xs"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Transaction Type Icon -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_tx_icon_container"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="@dimen/elevation_none"
+            app:cardBackgroundColor="@color/primary_container">
+
+            <ImageView
+                android:id="@+id/iv_tx_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_downward"
+                app:tint="@color/expense_red"
+                android:contentDescription="Tipe Transaksi" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Transaction Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/spacing_md">
+
+            <TextView
+                android:id="@+id/tv_tx_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Makan Siang &amp; Kopi"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/on_surface"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/tv_tx_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BCA • 01 Sep 2026, 12:30"
+                android:textSize="@dimen/text_xs"
+                android:textColor="@color/gray_500"
+                android:layout_marginTop="@dimen/spacing_2xs" />
+        </LinearLayout>
+
+        <!-- Amount and Badge -->
+        <TextView
+            android:id="@+id/tv_tx_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-Rp50.000"
+            android:textSize="@dimen/text_base"
+            android:fontFamily="sans-serif-bold"
+            android:textColor="@color/expense_red" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

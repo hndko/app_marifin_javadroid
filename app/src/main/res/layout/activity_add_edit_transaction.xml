@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Toolbar Header -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:title="Catat Transaksi"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_base">
+
+            <!-- Transaction Type Tabs -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_bottom_nav"
+                app:tabIndicatorColor="@color/primary"
+                app:tabSelectedTextColor="@color/primary"
+                app:tabTextColor="@color/gray_600"
+                app:tabMode="fixed"
+                android:layout_marginBottom="@dimen/spacing_lg" />
+
+            <!-- Amount Input Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MariFin.CardView"
+                app:cardElevation="@dimen/elevation_low"
+                app:contentPadding="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_amount_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nominal Pengeluaran"
+                        android:textSize="@dimen/text_xs"
+                        android:textColor="@color/gray_500" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MariFin.TextInputLayout"
+                        app:prefixText="Rp "
+                        app:prefixTextColor="@color/primary"
+                        app:startIconDrawable="@drawable/ic_cash"
+                        android:layout_marginTop="@dimen/spacing_xs">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textSize="@dimen/text_2xl"
+                            android:fontFamily="sans-serif-bold"
+                            android:hint="0" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Details Form Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MariFin.CardView"
+                app:cardElevation="@dimen/elevation_low"
+                app:contentPadding="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_xl">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Source Account Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_source_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Dari Rekening"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:startIconDrawable="@drawable/ic_wallet_card"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actv_source_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_base" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Destination Account Dropdown (Visible only for Transfer) -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_dest_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ke Rekening Tujuan"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:startIconDrawable="@drawable/ic_transfer"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actv_dest_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_base" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Category Dropdown (Visible only for Income/Expense) -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Kategori Transaksi"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:startIconDrawable="@drawable/ic_category_default"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actv_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_base" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Transaction Date Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tanggal &amp; Waktu"
+                        style="@style/Widget.MariFin.TextInputLayout"
+                        app:startIconDrawable="@drawable/ic_calendar"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_base" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Description / Notes Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Catatan (Opsional)"
+                        style="@style/Widget.MariFin.TextInputLayout"
+                        app:startIconDrawable="@drawable/ic_note"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapSentences"
+                            android:textSize="@dimen/text_base" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Save Transaction Button (Icon + Text) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_save_transaction"
+                app:icon="@drawable/ic_check"
+                style="@style/Widget.MariFin.Button"
+                android:layout_marginBottom="@dimen/spacing_2xl" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

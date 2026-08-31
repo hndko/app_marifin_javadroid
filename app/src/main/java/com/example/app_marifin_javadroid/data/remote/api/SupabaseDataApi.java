@@ -48,4 +48,27 @@ public interface SupabaseDataApi {
 
     @DELETE("rest/v1/categories")
     Call<Void> deleteCategory(@Query("id") String idFilter);
+
+    // Transactions
+    @GET("rest/v1/transactions?order=transaction_date.desc")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.TransactionDto>> getTransactions(
+            @Query("user_id") String userIdFilter,
+            @Query("limit") int limit
+    );
+
+    @Headers({"Content-Type: application/json", "Prefer: return=representation"})
+    @POST("rest/v1/transactions")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.TransactionDto>> insertTransaction(
+            @Body com.example.app_marifin_javadroid.data.remote.dto.TransactionDto transaction
+    );
+
+    @Headers({"Content-Type: application/json", "Prefer: return=representation"})
+    @PATCH("rest/v1/transactions")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.TransactionDto>> updateTransaction(
+            @Query("id") String idFilter,
+            @Body com.example.app_marifin_javadroid.data.remote.dto.TransactionDto transaction
+    );
+
+    @DELETE("rest/v1/transactions")
+    Call<Void> deleteTransaction(@Query("id") String idFilter);
 }

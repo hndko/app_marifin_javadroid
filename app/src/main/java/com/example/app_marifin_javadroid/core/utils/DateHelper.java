@@ -20,10 +20,21 @@ public final class DateHelper {
     public static final String FORMAT_DATE_ONLY = "yyyy-MM-dd";
     public static final String FORMAT_DISPLAY_FULL = "EEEE, dd MMMM yyyy";
     public static final String FORMAT_DISPLAY_SHORT = "dd MMM yyyy";
+    public static final String FORMAT_DISPLAY_DATETIME = "dd MMM yyyy, HH:mm";
     public static final String FORMAT_MONTH_YEAR = "MMMM yyyy";
 
     private DateHelper() {
         // Prevent instantiation
+    }
+
+    /**
+     * Formats Date to Indonesian display date with time (e.g. "04 Agu 2026, 14:30").
+     */
+    @NonNull
+    public static String formatDisplayDateTime(@Nullable Date date) {
+        if (date == null) return "-";
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DISPLAY_DATETIME, LOCALE_ID);
+        return sdf.format(date);
     }
 
     /**

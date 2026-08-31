@@ -18,6 +18,7 @@
     <string name="action_edit">Ubah</string>
     <string name="action_add">Tambah</string>
     <string name="action_add_transaction">+ Tambah Transaksi</string>
+    <string name="action_save_transaction">Simpan Transaksi</string>
     <string name="action_create_budget">+ Bikin Budget</string>
     <string name="action_add_account">+ Tambah Rekening</string>
     <string name="action_add_goal">+ Buat Target</string>

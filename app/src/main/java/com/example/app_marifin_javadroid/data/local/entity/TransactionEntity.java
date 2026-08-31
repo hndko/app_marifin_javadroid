@@ -91,6 +91,14 @@ public class TransactionEntity {
     private int attachmentCount = 0;
 
     @Nullable
+    @ColumnInfo(name = "attachment_url")
+    private String attachmentUrl;
+
+    @Nullable
+    @ColumnInfo(name = "destination_account_id")
+    private String destinationAccountId;
+
+    @Nullable
     @ColumnInfo(name = "transfer_group_id")
     private String transferGroupId;
 
@@ -176,6 +184,14 @@ public class TransactionEntity {
 
     public int getAttachmentCount() { return attachmentCount; }
     public void setAttachmentCount(int attachmentCount) { this.attachmentCount = attachmentCount; }
+
+    @Nullable
+    public String getAttachmentUrl() { return attachmentUrl; }
+    public void setAttachmentUrl(@Nullable String attachmentUrl) { this.attachmentUrl = attachmentUrl; }
+
+    @Nullable
+    public String getDestinationAccountId() { return destinationAccountId; }
+    public void setDestinationAccountId(@Nullable String destinationAccountId) { this.destinationAccountId = destinationAccountId; }
 
     @Nullable
     public String getTransferGroupId() { return transferGroupId; }
