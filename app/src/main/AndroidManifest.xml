@@ -42,6 +42,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.transaction.AddEditTransactionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

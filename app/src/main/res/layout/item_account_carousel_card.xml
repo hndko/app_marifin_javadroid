@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="220dp"
+    android:layout_height="120dp"
+    style="@style/Widget.MariFin.CardView"
+    app:cardElevation="@dimen/elevation_low"
+    app:cardBackgroundColor="@color/surface_variant"
+    android:layout_marginStart="@dimen/spacing_base"
+    android:layout_marginEnd="@dimen/spacing_xs"
+    android:layout_marginVertical="@dimen/spacing_xs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_carousel_acc_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_bank"
+                app:tint="@color/primary"
+                android:contentDescription="Icon Akun" />
+
+            <TextView
+                android:id="@+id/tv_carousel_acc_institution"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="BCA Digital"
+                android:textSize="@dimen/text_xs"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/gray_600"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:maxLines="1"
+                android:ellipsize="end" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_carousel_acc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tabungan Utama"
+            android:textSize="@dimen/text_sm"
+            android:fontFamily="sans-serif-bold"
+            android:textColor="@color/on_surface"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tv_carousel_acc_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp1.551.555"
+            android:textSize="@dimen/text_base"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/primary"
+            android:layout_marginTop="@dimen/spacing_2xs" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

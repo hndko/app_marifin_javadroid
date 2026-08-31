@@ -34,6 +34,8 @@ public class AuthActivity extends BaseActivity<ActivityAuthBinding> {
         if (authViewModel.isLoggedIn()) {
             if (!authViewModel.isOnboardingCompleted()) {
                 startActivity(new Intent(this, OnboardingActivity.class));
+            } else {
+                startActivity(new Intent(this, com.example.app_marifin_javadroid.presentation.main.MainActivity.class));
             }
             finish();
             return;
@@ -75,6 +77,8 @@ public class AuthActivity extends BaseActivity<ActivityAuthBinding> {
     public void navigateToOnboardingOrMain() {
         if (!authViewModel.isOnboardingCompleted()) {
             startActivity(new Intent(this, OnboardingActivity.class));
+        } else {
+            startActivity(new Intent(this, com.example.app_marifin_javadroid.presentation.main.MainActivity.class));
         }
         finish();
     }

@@ -76,6 +76,13 @@ public abstract class TransactionDao {
     @Query("SELECT SUM(amount) FROM transactions WHERE user_id = :userId AND type = 'expense' AND deleted_at IS NULL AND (:startDate IS NULL OR transaction_date >= :startDate) AND (:endDate IS NULL OR transaction_date <= :endDate)")
     public abstract LiveData<Double> getTotalExpenseLiveData(String userId, Date startDate, Date endDate);
 
+    @Query("SELECT t.category_id as category_id, COALESCE(c.name, 'Lainnya') as category_name, COALESCE(c.color, '#1E56A0') as category_color, COALESCE(c.icon, 'ic_category_default') as category_icon, SUM(t.amount) as total_amount, COUNT(t.id) as transaction_count " +
+            "FROM transactions t " +
+            "LEFT JOIN categories c ON t.category_id = c.id " +
+            "WHERE t.user_id = :userId AND t.type = 'expense' AND t.deleted_at IS NULL AND (:startDate IS NULL OR t.transaction_date >= :startDate) AND (:endDate IS NULL OR t.transaction_date <= :endDate) " +
+            "GROUP BY t.category_id ORDER BY total_amount DESC")
+    public abstract LiveData<List<com.example.app_marifin_javadroid.data.local.model.CategoryExpenseAggregate>> getCategoryExpenseBreakdownLiveData(String userId, Date startDate, Date endDate);
+
     @Query("DELETE FROM transactions WHERE user_id = :userId")
     public abstract void deleteAllByUserId(String userId);
 

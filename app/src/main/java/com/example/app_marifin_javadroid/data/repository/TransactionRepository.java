@@ -94,6 +94,16 @@ public class TransactionRepository {
         return transactionDao.getTotalExpenseLiveData(userId != null ? userId : "", startDate, endDate);
     }
 
+    public LiveData<List<TransactionEntity>> getRecentTransactionsLiveData(int limit) {
+        String userId = sessionManager.getUserId();
+        return transactionDao.getRecentTransactionsLiveData(userId != null ? userId : "", limit);
+    }
+
+    public LiveData<List<com.example.app_marifin_javadroid.data.local.model.CategoryExpenseAggregate>> getCategoryExpenseBreakdownLiveData(Date startDate, Date endDate) {
+        String userId = sessionManager.getUserId();
+        return transactionDao.getCategoryExpenseBreakdownLiveData(userId != null ? userId : "", startDate, endDate);
+    }
+
     /**
      * Refreshes transaction list from Supabase.
      */
