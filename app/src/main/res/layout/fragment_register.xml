@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_xl"
+        android:gravity="center_horizontal">
+
+        <!-- Top Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_xl">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_3xl"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_tagline"
+                android:textSize="@dimen/text_sm"
+                android:textColor="@color/gray_600"
+                android:layout_marginTop="@dimen/spacing_xs" />
+        </LinearLayout>
+
+        <!-- Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MariFin.CardView"
+            app:cardElevation="@dimen/elevation_low"
+            app:contentPadding="@dimen/spacing_xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buat Akun Baru"
+                    android:textSize="@dimen/text_xl"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/on_surface"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mulai kelola keuanganmu lebih cerdas"
+                    android:textSize="@dimen/text_sm"
+                    android:textColor="@color/gray_500"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
+
+                <!-- Full Name Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_full_name"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_person"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:hint="@string/placeholder_full_name"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_email"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_email"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/placeholder_email"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_password"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/placeholder_password"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Confirmation Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Konfirmasi Password"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginBottom="@dimen/spacing_lg">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="Ulangi password"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Register Button (Icon + Text) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_register"
+                    app:icon="@drawable/ic_add"
+                    style="@style/Widget.MariFin.Button" />
+
+                <!-- Loading Indicator -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/spacing_md" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Switch to Login -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginBottom="@dimen/spacing_xl">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sudah punya akun? "
+                android:textColor="@color/gray_600"
+                android:textSize="@dimen/text_sm" />
+
+            <TextView
+                android:id="@+id/btn_to_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masuk"
+                android:textColor="@color/primary"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_sm" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

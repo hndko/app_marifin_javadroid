@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Top Bar with Skip button -->
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:padding="@dimen/spacing_base">
+
+        <TextView
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lewati"
+            android:textColor="@color/gray_500"
+            android:textSize="@dimen/text_sm"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/spacing_sm" />
+    </LinearLayout>
+
+    <!-- ViewPager2 for Slides -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_bottom"
+        android:layout_below="@id/layout_top" />
+
+    <!-- Bottom Controls -->
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_xl">
+
+        <!-- Page Indicator / Steps count -->
+        <TextView
+            android:id="@+id/tv_step_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Langkah 1 dari 5"
+            android:textSize="@dimen/text_xs"
+            android:textColor="@color/gray_500"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/spacing_base" />
+
+        <!-- Next / Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lanjut"
+            app:icon="@drawable/ic_arrow_forward"
+            app:iconGravity="textEnd"
+            style="@style/Widget.MariFin.Button" />
+    </LinearLayout>
+
+</RelativeLayout>

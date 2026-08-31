@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_base">
+
+        <!-- Profile Header Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MariFin.CardView"
+            app:cardBackgroundColor="@color/primary"
+            app:contentPadding="@dimen/spacing_xl"
+            android:layout_marginBottom="@dimen/spacing_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="@dimen/elevation_none"
+                    app:cardBackgroundColor="@color/primary_light">
+
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/primary"
+                        android:contentDescription="Avatar Pengguna" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/spacing_base">
+
+                    <TextView
+                        android:id="@+id/tv_full_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengguna MariFin"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_lg"
+                        android:fontFamily="sans-serif-bold" />
+
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="pengguna@email.com"
+                        android:textColor="@color/primary_light"
+                        android:textSize="@dimen/text_sm"
+                        android:layout_marginTop="@dimen/spacing_2xs" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Preferences & Settings Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MariFin.CardView"
+            app:contentPadding="@dimen/spacing_base"
+            android:layout_marginBottom="@dimen/spacing_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pengaturan &amp; Preferensi"
+                    android:textSize="@dimen/text_base"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/on_surface"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <!-- Currency Preference -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mata Uang Utama"
+                        android:textSize="@dimen/text_base"
+                        android:textColor="@color/gray_700" />
+
+                    <TextView
+                        android:id="@+id/tv_currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IDR (Rp)"
+                        android:textColor="@color/primary"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="@dimen/text_sm" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    android:layout_marginVertical="@dimen/spacing_2xs" />
+
+                <!-- Timezone Preference -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Zona Waktu"
+                        android:textSize="@dimen/text_base"
+                        android:textColor="@color/gray_700" />
+
+                    <TextView
+                        android:id="@+id/tv_timezone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Asia/Jakarta (WIB)"
+                        android:textColor="@color/primary"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="@dimen/text_sm" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    android:layout_marginVertical="@dimen/spacing_2xs" />
+
+                <!-- Notifications Setting -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Notifikasi Budget &amp; Tagihan"
+                        android:textSize="@dimen/text_base"
+                        android:textColor="@color/gray_700" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aktif"
+                        android:textColor="@color/income_green"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="@dimen/text_sm" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Logout Button (Icon + Text) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_logout"
+            app:icon="@drawable/ic_logout"
+            style="@style/Widget.MariFin.Button.Outlined"
+            android:textColor="@color/expense_red"
+            app:iconTint="@color/expense_red"
+            app:strokeColor="@color/expense_red"
+            android:layout_marginTop="@dimen/spacing_base"
+            android:layout_marginBottom="@dimen/spacing_xl" />
+
+        <!-- App Version Footer -->
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MariFin v1.2.0\nProduct by Mari Partner"
+            android:textSize="@dimen/text_xs"
+            android:textColor="@color/gray_500"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+</ScrollView>

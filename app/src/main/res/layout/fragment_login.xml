@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_xl"
+        android:gravity="center_horizontal">
+
+        <!-- Top Header / Branding -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/spacing_2xl"
+            android:layout_marginBottom="@dimen/spacing_2xl">
+
+            <TextView
+                android:id="@+id/tv_brand_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_3xl"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/primary" />
+
+            <TextView
+                android:id="@+id/tv_tagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_tagline"
+                android:textSize="@dimen/text_sm"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/gray_600"
+                android:layout_marginTop="@dimen/spacing_xs" />
+        </LinearLayout>
+
+        <!-- Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MariFin.CardView"
+            app:cardElevation="@dimen/elevation_low"
+            app:contentPadding="@dimen/spacing_xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selamat Datang Kembali"
+                    android:textSize="@dimen/text_xl"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/on_surface"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masuk untuk memantau keuanganmu"
+                    android:textSize="@dimen/text_sm"
+                    android:textColor="@color/gray_500"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
+
+                <!-- Email Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_email"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_email"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/placeholder_email"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_password"
+                    style="@style/Widget.MariFin.TextInputLayout"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginBottom="@dimen/spacing_xs">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/placeholder_password"
+                        android:textSize="@dimen/text_base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Forgot Password Button -->
+                <TextView
+                    android:id="@+id/btn_forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lupa Password?"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_gravity="end"
+                    android:paddingTop="@dimen/spacing_xs"
+                    android:paddingBottom="@dimen/spacing_base" />
+
+                <!-- Login Button (Icon + Text) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_login"
+                    app:icon="@drawable/ic_check"
+                    style="@style/Widget.MariFin.Button" />
+
+                <!-- Loading Indicator -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/spacing_md" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Switch to Register -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_xl">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum punya akun? "
+                android:textColor="@color/gray_600"
+                android:textSize="@dimen/text_sm" />
+
+            <TextView
+                android:id="@+id/btn_to_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daftar Sekarang"
+                android:textColor="@color/primary"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_sm" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
