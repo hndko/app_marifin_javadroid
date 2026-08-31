@@ -29,6 +29,7 @@ public class RetrofitClient {
     private static volatile RetrofitClient INSTANCE;
     private final Retrofit retrofit;
     private final SupabaseAuthApi authApi;
+    private final SupabaseDataApi dataApi;
 
     private RetrofitClient(@NonNull Context context) {
         SecureSessionManager sessionManager = SecureSessionManager.getInstance(context);
@@ -72,6 +73,7 @@ public class RetrofitClient {
                 .build();
 
         authApi = retrofit.create(SupabaseAuthApi.class);
+        dataApi = retrofit.create(SupabaseDataApi.class);
     }
 
     public static RetrofitClient getInstance(@NonNull Context context) {
@@ -87,6 +89,10 @@ public class RetrofitClient {
 
     public SupabaseAuthApi getAuthApi() {
         return authApi;
+    }
+
+    public SupabaseDataApi getDataApi() {
+        return dataApi;
     }
 
     public Retrofit getRetrofit() {

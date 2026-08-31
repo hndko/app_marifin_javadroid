@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_xl">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Kategori Kustom"
+            android:textSize="@dimen/text_xl"
+            android:fontFamily="sans-serif-bold"
+            android:textColor="@color/on_surface"
+            android:layout_marginBottom="@dimen/spacing_lg" />
+
+        <!-- Category Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_category_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Kategori (contoh: Kafe &amp; Kopi)"
+            style="@style/Widget.MariFin.TextInputLayout"
+            app:startIconDrawable="@drawable/ic_category_default"
+            android:layout_marginBottom="@dimen/spacing_md">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textSize="@dimen/text_base" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Category Type Dropdown -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_category_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tipe Kategori"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:startIconDrawable="@drawable/ic_category_default"
+            android:layout_marginBottom="@dimen/spacing_xl">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_category_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="Pengeluaran"
+                android:textSize="@dimen/text_base" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_cancel"
+                style="@style/Widget.MariFin.Button.Text"
+                android:layout_marginEnd="@dimen/spacing_sm" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_save"
+                app:icon="@drawable/ic_check"
+                style="@style/Widget.MariFin.Button" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

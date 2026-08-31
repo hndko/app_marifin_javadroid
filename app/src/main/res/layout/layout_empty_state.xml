@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_empty_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/spacing_2xl">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        style="@style/Widget.MariFin.CardView"
+        app:cardCornerRadius="48dp"
+        app:cardBackgroundColor="@color/primary_container"
+        android:layout_marginBottom="@dimen/spacing_lg">
+
+        <ImageView
+            android:id="@+id/iv_empty_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_wallet_card"
+            app:tint="@color/primary"
+            android:contentDescription="Empty state icon" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_empty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum Ada Data"
+        android:textSize="@dimen/text_lg"
+        android:fontFamily="sans-serif-bold"
+        android:textColor="@color/on_surface"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_xs" />
+
+    <TextView
+        android:id="@+id/tv_empty_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mulai tambahkan data pertamamu sekarang."
+        android:textSize="@dimen/text_sm"
+        android:textColor="@color/gray_500"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_xl" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_empty_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Tambah Data"
+        app:icon="@drawable/ic_add"
+        style="@style/Widget.MariFin.Button" />
+
+</LinearLayout>

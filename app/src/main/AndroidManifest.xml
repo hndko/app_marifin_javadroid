@@ -28,5 +28,13 @@
         <activity
             android:name=".presentation.onboarding.OnboardingActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".presentation.account.AccountListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.category.CategoryListActivity"
+            android:exported="false" />
     </application>
 </manifest>

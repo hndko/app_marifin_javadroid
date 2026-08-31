@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.MariFin.CardView"
+    app:cardElevation="@dimen/elevation_low"
+    android:layout_marginHorizontal="@dimen/spacing_base"
+    android:layout_marginVertical="@dimen/spacing_xs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_base">
+
+        <!-- Number Column for table/list rule -->
+        <TextView
+            android:id="@+id/tv_account_number_seq"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textColor="@color/gray_400"
+            android:textSize="@dimen/text_sm"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Account Icon -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="@dimen/elevation_none"
+            app:cardBackgroundColor="@color/primary_container">
+
+            <ImageView
+                android:id="@+id/iv_account_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_bank"
+                app:tint="@color/primary"
+                android:contentDescription="Icon Rekening" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Account Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/spacing_md">
+
+            <TextView
+                android:id="@+id/tv_account_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blu by BCA Digital"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/on_surface" />
+
+            <TextView
+                android:id="@+id/tv_account_type_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank • **** 1234"
+                android:textSize="@dimen/text_xs"
+                android:textColor="@color/gray_500"
+                android:layout_marginTop="@dimen/spacing_2xs" />
+        </LinearLayout>
+
+        <!-- Account Balance & Action -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_account_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp1.551.555"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/primary" />
+
+            <!-- Table/List action button (icon-only with tooltip/contentDescription per rules) -->
+            <ImageButton
+                android:id="@+id/btn_account_menu"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_more_vert"
+                app:tint="@color/gray_500"
+                android:contentDescription="Opsi Rekening"
+                android:tooltipText="Opsi Rekening"
+                android:layout_marginStart="@dimen/spacing_xs" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
