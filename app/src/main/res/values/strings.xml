@@ -1,3 +1,75 @@
 <resources>
-    <string name="app_name">app_marifin_javadroid</string>
+    <!-- Brand & General -->
+    <string name="app_name">MariFin</string>
+    <string name="app_tagline">Kelola Keuangan, Lebih Cerdas.</string>
+    <string name="ai_assistant_name">FinGPT</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_expense">Pengeluaran</string>
+    <string name="nav_add">Tambah</string>
+    <string name="nav_budget">Budget</string>
+    <string name="nav_transaction">Transaksi</string>
+
+    <!-- Common Actions & Buttons (Icon + Text) -->
+    <string name="action_save">Simpan</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_edit">Ubah</string>
+    <string name="action_add">Tambah</string>
+    <string name="action_add_transaction">+ Tambah Transaksi</string>
+    <string name="action_create_budget">+ Bikin Budget</string>
+    <string name="action_add_account">+ Tambah Rekening</string>
+    <string name="action_add_goal">+ Buat Target</string>
+    <string name="action_add_bill">+ Tambah Tagihan</string>
+    <string name="action_confirm">Konfirmasi</string>
+    <string name="action_confirm_save">Konfirmasi &amp; Simpan</string>
+    <string name="action_retry">Coba Lagi</string>
+    <string name="action_export">Export Laporan</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_search">Cari</string>
+    <string name="action_login">Masuk</string>
+    <string name="action_register">Daftar Akun</string>
+    <string name="action_logout">Keluar</string>
+
+    <!-- Form Labels & Placeholders -->
+    <string name="label_email">Email</string>
+    <string name="placeholder_email">nama@email.com</string>
+    <string name="label_password">Password</string>
+    <string name="placeholder_password">Minimal 8 karakter</string>
+    <string name="label_full_name">Nama Lengkap</string>
+    <string name="placeholder_full_name">Masukkan nama lengkap</string>
+    <string name="label_amount">Nominal</string>
+    <string name="placeholder_amount">Rp 0</string>
+    <string name="label_account">Rekening</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_date">Tanggal</string>
+    <string name="label_merchant">Merchant / Tempat</string>
+    <string name="placeholder_merchant">Contoh: Warung Makan, Starbucks</string>
+    <string name="label_notes">Catatan (Opsional)</string>
+    <string name="placeholder_notes">Tambahkan keterangan tambahan</string>
+
+    <!-- Empty States -->
+    <string name="empty_transactions_title">Belum Ada Transaksi</string>
+    <string name="empty_transactions_desc">Mulai catat transaksi pertamamu untuk memantau arus kas dengan mudah.</string>
+    <string name="empty_accounts_title">Belum Ada Rekening</string>
+    <string name="empty_accounts_desc">Tambahkan rekening bank atau e-wallet untuk mulai mengelola saldo keuanganmu.</string>
+    <string name="empty_budgets_title">Belum Ada Budget</string>
+    <string name="empty_budgets_desc">Buat batas anggaran per kategori agar pengeluaranmu tetap terkontrol.</string>
+    <string name="empty_bills_title">Belum Ada Tagihan</string>
+    <string name="empty_bills_desc">Catat tagihan rutinmu agar tidak terlewat tanggal jatuh tempo.</string>
+    <string name="empty_goals_title">Belum Ada Target Finansial</string>
+    <string name="empty_goals_desc">Rencanakan target tabungan impianmu dan pantau progresnya secara berkala.</string>
+    <string name="empty_documents_title">Belum Ada Dokumen</string>
+    <string name="empty_documents_desc">Unggah struk atau bukti transaksi untuk pengarsipan yang rapi.</string>
+
+    <!-- Error Messages -->
+    <string name="error_network">Koneksi internet bermasalah. Periksa koneksi dan coba lagi.</string>
+    <string name="error_unknown">Terjadi kesalahan sistem. Silakan coba beberapa saat lagi.</string>
+    <string name="error_required_field">Kolom ini wajib diisi.</string>
+    <string name="error_invalid_email">Format email tidak valid.</string>
+    <string name="error_password_length">Password minimal 8 karakter.</string>
+    <string name="error_password_mismatch">Konfirmasi password tidak cocok.</string>
+    <string name="error_invalid_amount">Nominal transaksi harus lebih dari Rp 0.</string>
+    <string name="error_fingpt_unavailable">FinGPT sedang mengalami kendala. Coba beberapa saat lagi.</string>
 </resources>
