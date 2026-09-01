@@ -115,13 +115,21 @@ Aturan ini menjamin bahwa setiap pengguna hanya dapat membaca, menambah, menguba
 ---
 
 ### 2.5. Konfigurasi Supabase Storage (Receipts Vault)
-Untuk mendukung penyimpanan berkas struk belanja dan dokumen:
+Untuk mendukung penyimpanan berkas struk belanja, kuitansi, dan faktur transaksi:
 1. Di sidebar kiri Supabase, buka menu **Storage**.
-2. Klik tombol **New bucket**.
-3. Isi konfigurasi bucket:
-   - **Bucket name**: `documents`
-   - **Public bucket**: Nonaktifkan (*Private bucket*).
-4. Klik **Save bucket**.
+2. Klik tombol **New bucket** (atau **Create file bucket**).
+3. Isi konfigurasi pada modal pembuatan bucket sebagai berikut:
+   - **Bucket name**: `documents` *(wajib persis, tidak boleh diubah setelah dibuat)*.
+   - **Public bucket**: **OFF / Nonaktifkan** *(PENTING: Bucket wajib berstatus Private agar berkas finansial sensitif pengguna tidak bisa diakses publik tanpa token autentikasi)*.
+   - **Restrict file size** *(Opsional tapi Direkomendasikan untuk Proteksi Ganda)*: Aktifkan dan isi `5MB` (atau `5242880` bytes).
+   - **Restrict MIME types** *(Opsional tapi Direkomendasikan)*: Aktifkan dan masukkan format aman:
+     ```text
+     image/jpeg, image/png, application/pdf
+     ```
+4. Klik tombol **Create** / **Save bucket**.
+
+> [!TIP]
+> Aplikasi Android MariFin sudah memvalidasi keamanan berkas di sisi klien (*Client-Side Validation*), namun mengaktifkan pembatasan di Supabase Storage memberikan proteksi ganda (*Server-Side Defense-in-Depth*).
 
 ---
 
