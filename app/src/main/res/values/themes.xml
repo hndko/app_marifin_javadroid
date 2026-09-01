@@ -30,6 +30,13 @@
         <item name="textInputStyle">@style/Widget.MariFin.TextInputLayout</item>
     </style>
 
+    <!-- Starting / Splash Screen Theme -->
+    <style name="Theme.MariFin.Starting" parent="Theme.MariFin">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/primary</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/ic_marifin_logo</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
     <!-- Legacy Alias for compatibility -->
     <style name="Theme.App_marifin_javadroid" parent="Theme.MariFin" />
 

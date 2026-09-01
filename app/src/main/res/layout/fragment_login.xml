@@ -23,20 +23,12 @@
             android:layout_marginTop="@dimen/spacing_lg"
             android:layout_marginBottom="@dimen/spacing_xl">
 
-            <FrameLayout
+            <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/bg_brand_logo_circle"
-                android:layout_marginBottom="@dimen/spacing_md">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_wallet_card"
-                    app:tint="@color/white"
-                    android:contentDescription="@string/app_name" />
-            </FrameLayout>
+                android:src="@drawable/ic_marifin_logo"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/tv_brand_name"

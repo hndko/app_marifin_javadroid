@@ -36,27 +36,27 @@ public class OnboardingActivity extends BaseActivity<ActivityOnboardingBinding> 
         slides.add(new OnboardingSlide(
                 "Selamat Datang di MariFin",
                 "Aplikasi pencatatan keuangan pintar untuk membantumu mengelola arus kas, budget, dan rekening secara cerdas.",
-                R.drawable.ic_person
+                R.drawable.ic_marifin_logo
         ));
         slides.add(new OnboardingSlide(
                 "Catat Transaksi dengan Mudah",
                 "Catat pemasukan, pengeluaran, dan transfer antar rekening dalam hitungan detik tanpa ribet.",
-                R.drawable.ic_check
+                R.drawable.ic_wallet_card
         ));
         slides.add(new OnboardingSlide(
                 "Pantau Pengeluaran & Budget",
                 "Tetapkan batas anggaran per kategori dan pantau persentase penggunaan agar keuangan tetap aman.",
-                R.drawable.ic_lock
+                R.drawable.ic_budget
         ));
         slides.add(new OnboardingSlide(
                 "Biarkan FinGPT Membantu",
                 "Asisten AI cerdas untuk mencatat transaksi dengan bahasa alami dan memberikan saran finansial terkontrol.",
-                R.drawable.ic_person
+                R.drawable.ic_robot
         ));
         slides.add(new OnboardingSlide(
                 "Setup Rekening Pertamamu",
                 "Hubungkan atau catat saldo awal rekening bank dan e-wallet untuk mulai mengontrol masa depanmu.",
-                R.drawable.ic_add
+                R.drawable.ic_bank
         ));
 
         adapter = new OnboardingAdapter(slides);
