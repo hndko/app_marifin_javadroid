@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Outer Circular Soft Background -->
+    <path
+        android:fillColor="#FEF3C7"
+        android:pathData="M60,10A50,50 0 1,0 60,110A50,50 0 1,0 60,10Z" />
+
+    <!-- Main Shield Container -->
+    <path
+        android:fillColor="#1E56A0"
+        android:pathData="M60,24L32,36v24c0,18.4 12,35.6 28,40c16,-4.4 28,-21.6 28,-40V36L60,24Z" />
+
+    <!-- Inner Shield Surface -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,30L38,40v20c0,14.7 9.6,28.5 22,32c12.4,-3.5 22,-17.3 22,-32V40L60,30Z" />
+
+    <!-- 4-Zone Progress Meter -->
+    <!-- Safe Arc (Green) -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M46,56h28c1.1,0 2,0.9 2,2v4c0,1.1 -0.9,2 -2,2H46c-1.1,0 -2,-0.9 -2,-2v-4C44,56.9 44.9,56 46,56Z" />
+
+    <!-- Warning Arc (Yellow) -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M46,68h20c1.1,0 2,0.9 2,2v4c0,1.1 -0.9,2 -2,2H46c-1.1,0 -2,-0.9 -2,-2v-4C44,68.9 44.9,68 46,68Z" />
+
+    <!-- Danger Arc (Red) -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M46,80h12c1.1,0 2,0.9 2,2v4c0,1.1 -0.9,2 -2,2H46c-1.1,0 -2,-0.9 -2,-2v-4C44,80.9 44.9,80 46,80Z" />
+
+    <!-- Percentage Badge (Cyan) -->
+    <path
+        android:fillColor="#3AB4F2"
+        android:pathData="M60,38A6,6 0 1,0 60,50A6,6 0 1,0 60,38Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58,41h4v6h-4Z" />
+</vector>

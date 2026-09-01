@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Outer Circular Soft Background -->
+    <path
+        android:fillColor="#E8F1FA"
+        android:pathData="M60,10A50,50 0 1,0 60,110A50,50 0 1,0 60,10Z" />
+
+    <!-- Card 1: Income Card (Green accent) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,32h52c3.3,0 6,2.7 6,6v24c0,3.3 -2.7,6 -6,6H24c-3.3,0 -6,-2.7 -6,-6V38C18,34.7 20.7,32 24,32Z" />
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M30,50l6,-6l4,4l8,-8l-3,-1l7,-1l-1,7l-3,-1l-7,7l-4,-4l-5,5Z" />
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M48,44h26v4H48Z" />
+    <path
+        android:fillColor="#CBD5E1"
+        android:pathData="M48,52h18v3H48Z" />
+
+    <!-- Card 2: Expense Card (Red accent) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44,54h52c3.3,0 6,2.7 6,6v24c0,3.3 -2.7,6 -6,6H44c-3.3,0 -6,-2.7 -6,-6V60C38,56.7 40.7,54 44,54Z" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M50,70l6,6l4,-4l8,8l-3,1l7,1l-1,-7l-3,1l-7,-7l-4,4l-5,-5Z" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M68,66h20v4H68Z" />
+    <path
+        android:fillColor="#CBD5E1"
+        android:pathData="M68,74h14v3H68Z" />
+
+    <!-- Transfer Arrow Accent -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M60,20l6,6h-4v8h-4v-8h-4Z" />
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M60,100l-6,-6h4v-8h4v8h4Z" />
+</vector>

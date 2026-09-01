@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Outer Circular Soft Background -->
+    <path
+        android:fillColor="#E0F4FF"
+        android:pathData="M60,10A50,50 0 1,0 60,110A50,50 0 1,0 60,10Z" />
+
+    <!-- Vault Safe Box Body -->
+    <path
+        android:fillColor="#1E56A0"
+        android:pathData="M30,34h60c4.4,0 8,3.6 8,8v44c0,4.4 -3.6,8 -8,8H30c-4.4,0 -8,-3.6 -8,-8V42C22,37.6 25.6,34 30,34Z" />
+
+    <!-- Inner Safe Door -->
+    <path
+        android:fillColor="#3AB4F2"
+        android:pathData="M34,38h52c2.2,0 4,1.8 4,4v36c0,2.2 -1.8,4 -4,4H34c-2.2,0 -4,-1.8 -4,-4V42C30,39.8 31.8,38 34,38Z" />
+
+    <!-- Safe Dial Wheel -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,46A14,14 0 1,0 60,74A14,14 0 1,0 60,46Z" />
+    <path
+        android:fillColor="#1E56A0"
+        android:pathData="M60,52A8,8 0 1,0 60,68A8,8 0 1,0 60,52Z" />
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M60,56A4,4 0 1,0 60,64A4,4 0 1,0 60,56Z" />
+
+    <!-- Dial Handle Spokes -->
+    <path
+        android:fillColor="#CBD5E1"
+        android:pathData="M59,42h2v6h-2Z M59,72h2v6h-2Z M42,59h6v2h-6Z M72,59h6v2h-6Z" />
+
+    <!-- Safe Keyhole / Security Padlock Indicator -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M78,44h6v6h-6Z" />
+</vector>

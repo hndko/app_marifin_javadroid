@@ -5,24 +5,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="@dimen/spacing_2xl">
+    android:paddingHorizontal="@dimen/spacing_2xl"
+    android:paddingVertical="@dimen/spacing_xl">
 
-    <!-- Slide Visual Card -->
+    <!-- Hero Illustration Card (Elevated, Soft Border, No Monochrome Tint) -->
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         style="@style/Widget.MariFin.CardView"
-        app:cardCornerRadius="80dp"
-        app:cardBackgroundColor="@color/primary_container"
+        app:cardCornerRadius="36dp"
+        app:cardElevation="@dimen/elevation_low"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/divider"
+        app:cardBackgroundColor="@color/surface"
         android:layout_marginBottom="@dimen/spacing_2xl">
 
         <ImageView
             android:id="@+id/iv_slide_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_person"
-            app:tint="@color/primary"
+            android:src="@drawable/ic_marifin_logo"
             android:contentDescription="Ilustrasi Onboarding" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -43,10 +46,11 @@
         android:id="@+id/tv_slide_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="420dp"
         android:text="Aplikasi pencatatan keuangan pintar untuk membantumu mengelola arus kas, budget, dan rekening secara cerdas."
         android:textSize="@dimen/text_base"
         android:textColor="@color/gray_600"
         android:gravity="center"
-        android:lineSpacingExtra="4dp" />
+        android:lineSpacingExtra="6dp" />
 
 </LinearLayout>
