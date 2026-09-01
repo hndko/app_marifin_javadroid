@@ -32,8 +32,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         sessionManager = SecureSessionManager.getInstance(requireContext());
 
-        binding.tvFullName.setText(sessionManager.getFullName().isEmpty() ? "Pengguna MariFin" : sessionManager.getFullName());
-        binding.tvEmail.setText(sessionManager.getEmail() != null ? sessionManager.getEmail() : "user@email.com");
+        binding.tvFullName.setText(!sessionManager.getFullName().isEmpty() ? sessionManager.getFullName() : "Pengguna MariFin");
+        binding.tvEmail.setText(sessionManager.getEmail() != null ? sessionManager.getEmail() : "-");
         binding.tvAppVersion.setText("MariFin v2.0.0\nProduct by Mari Partner\nKelola Keuangan, Lebih Cerdas.");
 
         // Feature Navigation
