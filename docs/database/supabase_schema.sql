@@ -391,11 +391,12 @@ BEGIN
 
     RETURN v_transfer_group_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp;
+$$ LANGUAGE plpgsql SECURITY INVOKER SET search_path = public, pg_temp;
 
--- Secure function execution permissions
-REVOKE EXECUTE ON FUNCTION public.execute_transfer FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.execute_transfer TO authenticated;
+-- Secure function execution permissions (Invoker context)
+REVOKE EXECUTE ON FUNCTION public.execute_transfer(UUID, UUID, NUMERIC, NUMERIC, TIMESTAMPTZ, TEXT) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.execute_transfer(UUID, UUID, NUMERIC, NUMERIC, TIMESTAMPTZ, TEXT) FROM anon;
+GRANT EXECUTE ON FUNCTION public.execute_transfer(UUID, UUID, NUMERIC, NUMERIC, TIMESTAMPTZ, TEXT) TO authenticated;
 
 -- ============================================================================
 -- TRIGGER: AUTO-CREATE PROFILE & PREFERENCES ON SIGNUP
@@ -418,6 +419,11 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp;
+
+-- Revoke public & external REST API execution on trigger function
+REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM anon;
+REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM authenticated;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
