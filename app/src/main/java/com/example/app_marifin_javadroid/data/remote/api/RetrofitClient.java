@@ -34,13 +34,22 @@ public class RetrofitClient {
     private RetrofitClient(@NonNull Context context) {
         SecureSessionManager sessionManager = SecureSessionManager.getInstance(context);
 
+        String rawUrl = com.example.app_marifin_javadroid.BuildConfig.SUPABASE_URL;
+        String baseUrl = (rawUrl != null && !rawUrl.isEmpty()) ? rawUrl : "https://your-project.supabase.co/";
+        if (!baseUrl.endsWith("/")) {
+            baseUrl = baseUrl + "/";
+        }
+
+        String rawAnonKey = com.example.app_marifin_javadroid.BuildConfig.SUPABASE_ANON_KEY;
+        String anonKey = (rawAnonKey != null && !rawAnonKey.isEmpty()) ? rawAnonKey : "your-anon-key";
+
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         Interceptor headerInterceptor = chain -> {
             Request original = chain.request();
             Request.Builder builder = original.newBuilder()
-                    .header("apikey", DEFAULT_ANON_KEY);
+                    .header("apikey", anonKey);
 
             // If request doesn't have an Authorization header and user is logged in, attach token
             String existingAuth = original.header("Authorization");
@@ -67,7 +76,7 @@ public class RetrofitClient {
                 .create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(DEFAULT_BASE_URL)
+                .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

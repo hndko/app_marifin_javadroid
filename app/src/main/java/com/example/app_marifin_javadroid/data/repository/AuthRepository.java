@@ -92,12 +92,11 @@ public class AuthRepository {
 
                     callback.onResult(Resource.success(authResponse));
                 } else {
-                    String errorMsg = response.code() == 400 ? "Email atau password salah." : "Gagal masuk. Kode: " + response.code();
+                    String errorMsg = parseErrorMessage(response, response.code() == 400 ? "Email atau password salah." : "Gagal masuk. Kode: " + response.code());
                     callback.onResult(Resource.error(errorMsg));
                 }
             } catch (Exception e) {
-                // If offline, provide clear error
-                callback.onResult(Resource.error("Koneksi internet bermasalah. Coba lagi."));
+                callback.onResult(Resource.error("Koneksi gagal: " + (e.getMessage() != null ? e.getMessage() : "Periksa jaringan internet.")));
             }
         });
     }
@@ -132,13 +131,31 @@ public class AuthRepository {
 
                     callback.onResult(Resource.success(authResponse));
                 } else {
-                    String errorMsg = "Pendaftaran gagal. Silakan gunakan email lain atau coba lagi.";
+                    String errorMsg = parseErrorMessage(response, "Pendaftaran gagal (Kode " + response.code() + "). Silakan coba lagi.");
                     callback.onResult(Resource.error(errorMsg));
                 }
             } catch (Exception e) {
-                callback.onResult(Resource.error("Koneksi internet bermasalah. Coba lagi."));
+                callback.onResult(Resource.error("Koneksi gagal: " + (e.getMessage() != null ? e.getMessage() : "Periksa jaringan internet.")));
             }
         });
+    }
+
+    private String parseErrorMessage(Response<?> response, String fallback) {
+        if (response != null && response.errorBody() != null) {
+            try {
+                String errorJson = response.errorBody().string();
+                if (errorJson.contains("User already registered") || errorJson.contains("user_already_exists")) {
+                    return "Email sudah terdaftar. Silakan gunakan email lain atau langsung Masuk.";
+                } else if (errorJson.contains("Password should be at least")) {
+                    return "Kata sandi terlalu pendek. Minimal 6 karakter.";
+                } else if (errorJson.contains("Invalid login credentials") || errorJson.contains("invalid_grant")) {
+                    return "Email atau kata sandi tidak cocok.";
+                } else if (errorJson.contains("Email rate limit exceeded")) {
+                    return "Terlalu banyak percobaan. Harap tunggu beberapa saat.";
+                }
+            } catch (Exception ignored) {}
+        }
+        return fallback;
     }
 
     /**

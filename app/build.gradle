@@ -8,12 +8,24 @@ android {
         version = release(37)
     }
 
+    Properties properties = new Properties()
+    File localPropertiesFile = project.rootProject.file('local.properties')
+    if (localPropertiesFile.exists()) {
+        properties.load(localPropertiesFile.newDataInputStream())
+    }
+
+    String supabaseUrl = properties.getProperty('SUPABASE_URL', 'https://your-project.supabase.co')
+    String supabaseAnonKey = properties.getProperty('SUPABASE_ANON_KEY', 'your-anon-key')
+
     defaultConfig {
         applicationId "com.example.app_marifin_javadroid"
         minSdk 26
         targetSdk 37
         versionCode 11
         versionName "2.0.0"
+
+        buildConfigField "String", "SUPABASE_URL", "\"${supabaseUrl}\""
+        buildConfigField "String", "SUPABASE_ANON_KEY", "\"${supabaseAnonKey}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,6 +42,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
