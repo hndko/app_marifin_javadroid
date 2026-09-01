@@ -296,36 +296,36 @@ ALTER TABLE public.ai_transaction_drafts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_preferences ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
 
--- Standard User Isolation Policies (auth.uid() = user_id)
-CREATE POLICY "Users can manage own profile" ON public.profiles FOR ALL USING (auth.uid() = id);
-CREATE POLICY "Users can manage own accounts" ON public.financial_accounts FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own transactions" ON public.transactions FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own transfers" ON public.transaction_transfers FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own budgets" ON public.budgets FOR ALL USING (auth.uid() = user_id);
+-- Standard User Isolation Policies ((select auth.uid()) = user_id)
+CREATE POLICY "Users can manage own profile" ON public.profiles FOR ALL USING ((select auth.uid()) = id);
+CREATE POLICY "Users can manage own accounts" ON public.financial_accounts FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own transactions" ON public.transactions FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own transfers" ON public.transaction_transfers FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own budgets" ON public.budgets FOR ALL USING ((select auth.uid()) = user_id);
 CREATE POLICY "Users can manage own budget categories" ON public.budget_categories FOR ALL 
-    USING (EXISTS (SELECT 1 FROM public.budgets WHERE budgets.id = budget_categories.budget_id AND budgets.user_id = auth.uid()));
-CREATE POLICY "Users can manage own bills" ON public.bills FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own goals" ON public.financial_goals FOR ALL USING (auth.uid() = user_id);
+    USING (EXISTS (SELECT 1 FROM public.budgets WHERE budgets.id = budget_categories.budget_id AND budgets.user_id = (select auth.uid())));
+CREATE POLICY "Users can manage own bills" ON public.bills FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own goals" ON public.financial_goals FOR ALL USING ((select auth.uid()) = user_id);
 CREATE POLICY "Users can manage own goal contributions" ON public.goal_contributions FOR ALL 
-    USING (EXISTS (SELECT 1 FROM public.financial_goals WHERE financial_goals.id = goal_contributions.goal_id AND financial_goals.user_id = auth.uid()));
-CREATE POLICY "Users can manage own documents" ON public.documents FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own notifications" ON public.notifications FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own AI conversations" ON public.ai_conversations FOR ALL USING (auth.uid() = user_id);
+    USING (EXISTS (SELECT 1 FROM public.financial_goals WHERE financial_goals.id = goal_contributions.goal_id AND financial_goals.user_id = (select auth.uid())));
+CREATE POLICY "Users can manage own documents" ON public.documents FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own notifications" ON public.notifications FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own AI conversations" ON public.ai_conversations FOR ALL USING ((select auth.uid()) = user_id);
 CREATE POLICY "Users can manage own AI messages" ON public.ai_messages FOR ALL 
-    USING (EXISTS (SELECT 1 FROM public.ai_conversations WHERE ai_conversations.id = ai_messages.conversation_id AND ai_conversations.user_id = auth.uid()));
-CREATE POLICY "Users can manage own AI drafts" ON public.ai_transaction_drafts FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can manage own preferences" ON public.user_preferences FOR ALL USING (auth.uid() = user_id);
-CREATE POLICY "Users can view own audit logs" ON public.audit_logs FOR SELECT USING (auth.uid() = user_id);
+    USING (EXISTS (SELECT 1 FROM public.ai_conversations WHERE ai_conversations.id = ai_messages.conversation_id AND ai_conversations.user_id = (select auth.uid())));
+CREATE POLICY "Users can manage own AI drafts" ON public.ai_transaction_drafts FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can manage own preferences" ON public.user_preferences FOR ALL USING ((select auth.uid()) = user_id);
+CREATE POLICY "Users can view own audit logs" ON public.audit_logs FOR SELECT USING ((select auth.uid()) = user_id);
 
 -- Category Specific RLS: Public Default (is_default = true) or User Owned
 CREATE POLICY "Users can read default and own categories" ON public.categories FOR SELECT 
-    USING (is_default = TRUE OR auth.uid() = user_id);
+    USING (is_default = TRUE OR (select auth.uid()) = user_id);
 CREATE POLICY "Users can insert own categories" ON public.categories FOR INSERT 
-    WITH CHECK (auth.uid() = user_id AND is_default = FALSE);
+    WITH CHECK ((select auth.uid()) = user_id AND is_default = FALSE);
 CREATE POLICY "Users can update own categories" ON public.categories FOR UPDATE 
-    USING (auth.uid() = user_id AND is_default = FALSE);
+    USING ((select auth.uid()) = user_id AND is_default = FALSE);
 CREATE POLICY "Users can delete own categories" ON public.categories FOR DELETE 
-    USING (auth.uid() = user_id AND is_default = FALSE);
+    USING ((select auth.uid()) = user_id AND is_default = FALSE);
 
 -- ============================================================================
 -- STORED PROCEDURE (RPC): EXECUTE TRANSFER ATOMICALLY
