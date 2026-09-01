@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_lg"
+    android:background="@color/surface">
+
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buat Target Tabungan"
+        android:textSize="@dimen/text_lg"
+        android:fontFamily="sans-serif-bold"
+        android:textColor="@color/on_surface"
+        android:layout_marginBottom="@dimen/spacing_md" />
+
+    <!-- 1. Goal Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_goal_name"
+        style="@style/Widget.MariFin.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Target (Contoh: Beli Laptop)"
+        app:startIconDrawable="@drawable/ic_bolt"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 2. Target Amount -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_goal_target_amount"
+        style="@style/Widget.MariFin.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nominal Target (Rp)"
+        app:startIconDrawable="@drawable/ic_wallet_card"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_target_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 3. Target Deadline (Optional) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_goal_deadline"
+        style="@style/Widget.MariFin.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Target Tercapai (Opsional)"
+        app:startIconDrawable="@drawable/ic_calendar"
+        android:layout_marginBottom="@dimen/spacing_lg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_goal"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_cancel"
+            android:textColor="@color/gray_600"
+            android:layout_marginEnd="@dimen/spacing_sm" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save_goal"
+            style="@style/Widget.MariFin.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[✓] Simpan" />
+    </LinearLayout>
+
+</LinearLayout>

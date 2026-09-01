@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_lg"
+    android:background="@color/surface">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setor Tabungan"
+        android:textSize="@dimen/text_lg"
+        android:fontFamily="sans-serif-bold"
+        android:textColor="@color/on_surface"
+        android:layout_marginBottom="@dimen/spacing_sm" />
+
+    <!-- Goal Summary Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MariFin.CardView"
+        app:cardElevation="@dimen/elevation_none"
+        app:cardBackgroundColor="@color/surface_variant"
+        app:contentPadding="@dimen/spacing_md"
+        android:layout_marginBottom="@dimen/spacing_md">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_contrib_goal_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dana Darurat"
+                android:textSize="@dimen/text_sm"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/gray_700" />
+
+            <TextView
+                android:id="@+id/tv_contrib_goal_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terkumpul: Rp15.000.000 / Rp30.000.000"
+                android:textSize="@dimen/text_base"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/primary"
+                android:layout_marginTop="@dimen/spacing_2xs" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 1. Source Account Dropdown -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_contrib_source_account"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pilih Rekening Sumber"
+        app:startIconDrawable="@drawable/ic_bank"
+        app:boxStrokeColor="@color/primary"
+        app:boxCornerRadiusTopStart="@dimen/radius_md"
+        app:boxCornerRadiusTopEnd="@dimen/radius_md"
+        app:boxCornerRadiusBottomStart="@dimen/radius_md"
+        app:boxCornerRadiusBottomEnd="@dimen/radius_md"
+        android:layout_marginBottom="@dimen/spacing_sm">
+
+        <AutoCompleteTextView
+            android:id="@+id/actv_contrib_source_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 2. Contribution Amount -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_contrib_amount"
+        style="@style/Widget.MariFin.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nominal Setoran (Rp)"
+        app:startIconDrawable="@drawable/ic_wallet_card"
+        android:layout_marginBottom="@dimen/spacing_lg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_contrib_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_contrib"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_cancel"
+            android:textColor="@color/gray_600"
+            android:layout_marginEnd="@dimen/spacing_sm" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm_contrib"
+            style="@style/Widget.MariFin.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[+] Setor Tabungan" />
+    </LinearLayout>
+
+</LinearLayout>

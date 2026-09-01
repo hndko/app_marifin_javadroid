@@ -46,6 +46,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.bill.BillListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.goal.GoalListActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.transaction.AddEditTransactionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
