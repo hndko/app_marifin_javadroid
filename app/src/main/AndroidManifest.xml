@@ -62,6 +62,11 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.ai.FinGptActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".presentation.transaction.AddEditTransactionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

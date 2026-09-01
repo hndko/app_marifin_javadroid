@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/spacing_base"
+    android:paddingVertical="@dimen/spacing_2xs">
+
+    <!-- USER MESSAGE BUBBLE -->
+    <LinearLayout
+        android:id="@+id/layout_user_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/bg_chat_user"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingVertical="@dimen/spacing_sm"
+        android:layout_marginStart="48dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_user_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beli bensin 50rb di Pertamina"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_sm" />
+    </LinearLayout>
+
+    <!-- FINGPT BOT BUBBLE -->
+    <LinearLayout
+        android:id="@+id/layout_bot_bubble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_robot"
+            app:tint="@color/primary"
+            android:background="@drawable/bg_circle_icon"
+            android:padding="6dp"
+            android:layout_marginEnd="@dimen/spacing_xs"
+            android:contentDescription="FinGPT" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_chat_bot"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingVertical="@dimen/spacing_sm">
+
+            <TextView
+                android:id="@+id/tv_bot_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saya mendeteksi transaksi..."
+                android:textColor="@color/on_surface"
+                android:textSize="@dimen/text_sm" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_preview_draft"
+                style="@style/Widget.MariFin.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="[✓] Konfirmasi Draft"
+                android:textSize="@dimen/text_xs"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
