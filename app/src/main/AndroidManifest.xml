@@ -54,6 +54,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.report.ReportActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.document.DocumentVaultActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.transaction.AddEditTransactionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

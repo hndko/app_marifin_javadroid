@@ -137,4 +137,19 @@ public interface SupabaseDataApi {
 
     @DELETE("rest/v1/financial_goals")
     Call<Void> deleteGoal(@Query("id") String idFilter);
+
+    // Documents / Vault
+    @GET("rest/v1/documents?order=created_at.desc")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.DocumentDto>> getDocuments(
+            @Query("user_id") String userIdFilter
+    );
+
+    @Headers({"Content-Type: application/json", "Prefer: return=representation"})
+    @POST("rest/v1/documents")
+    Call<List<com.example.app_marifin_javadroid.data.remote.dto.DocumentDto>> insertDocument(
+            @Body com.example.app_marifin_javadroid.data.remote.dto.DocumentDto document
+    );
+
+    @DELETE("rest/v1/documents")
+    Call<Void> deleteDocument(@Query("id") String idFilter);
 }

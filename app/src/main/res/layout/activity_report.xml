@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:title="Laporan Keuangan"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_upward" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_report_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            app:tabTextColor="@color/primary_light"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/secondary"
+            app:tabMode="fixed" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_base"
+            android:paddingBottom="@dimen/spacing_2xl">
+
+            <!-- Date Range Indicator -->
+            <TextView
+                android:id="@+id/tv_report_date_range"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Periode: 01 Agu 2026 - 31 Agu 2026"
+                android:textSize="@dimen/text_sm"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/gray_600"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/spacing_md" />
+
+            <!-- KPI Cards Grid (2x2) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_sm">
+
+                <!-- 1. Total Income -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MariFin.CardView"
+                    app:cardElevation="@dimen/elevation_low"
+                    app:contentPadding="@dimen/spacing_md"
+                    android:layout_marginEnd="@dimen/spacing_xs">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Pemasukan"
+                            android:textSize="@dimen/text_xs"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tv_report_total_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Rp0"
+                            android:textSize="@dimen/text_base"
+                            android:fontFamily="sans-serif-bold"
+                            android:textColor="@color/income_green"
+                            android:layout_marginTop="@dimen/spacing_2xs" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 2. Total Expense -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MariFin.CardView"
+                    app:cardElevation="@dimen/elevation_low"
+                    app:contentPadding="@dimen/spacing_md"
+                    android:layout_marginStart="@dimen/spacing_xs">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Pengeluaran"
+                            android:textSize="@dimen/text_xs"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tv_report_total_expense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-Rp0"
+                            android:textSize="@dimen/text_base"
+                            android:fontFamily="sans-serif-bold"
+                            android:textColor="@color/expense_red"
+                            android:layout_marginTop="@dimen/spacing_2xs" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_lg">
+
+                <!-- 3. Net Cash Flow -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MariFin.CardView"
+                    app:cardElevation="@dimen/elevation_low"
+                    app:contentPadding="@dimen/spacing_md"
+                    android:layout_marginEnd="@dimen/spacing_xs">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Arus Kas Bersih"
+                            android:textSize="@dimen/text_xs"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tv_report_net_cash_flow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp0"
+                            android:textSize="@dimen/text_base"
+                            android:fontFamily="sans-serif-bold"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="@dimen/spacing_2xs" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 4. Savings Rate -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MariFin.CardView"
+                    app:cardElevation="@dimen/elevation_low"
+                    app:contentPadding="@dimen/spacing_md"
+                    android:layout_marginStart="@dimen/spacing_xs">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rasio Tabungan"
+                            android:textSize="@dimen/text_xs"
+                            android:textColor="@color/gray_500" />
+
+                        <TextView
+                            android:id="@+id/tv_report_savings_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0%"
+                            android:textSize="@dimen/text_base"
+                            android:fontFamily="sans-serif-bold"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="@dimen/spacing_2xs" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Export Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_export_csv"
+                style="@style/Widget.MariFin.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[↓] Export Laporan (CSV)"
+                app:icon="@drawable/ic_download"
+                android:layout_marginBottom="@dimen/spacing_base" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
