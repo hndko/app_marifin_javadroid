@@ -185,6 +185,211 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Features & Management Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MariFin.CardView"
+            app:contentPadding="@dimen/spacing_base"
+            android:layout_marginBottom="@dimen/spacing_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fitur &amp; Menu Utama"
+                    android:textSize="@dimen/text_base"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/on_surface"
+                    android:layout_marginBottom="@dimen/spacing_sm" />
+
+                <!-- Reports Item -->
+                <LinearLayout
+                    android:id="@+id/btn_nav_reports"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chart_donut"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Laporan" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Laporan Keuangan &amp; Ekspor CSV"
+                        android:textColor="@color/gray_800"
+                        android:textSize="@dimen/text_sm" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/gray_400"
+                        android:contentDescription="Next" />
+                </LinearLayout>
+
+                <!-- Bills Item -->
+                <LinearLayout
+                    android:id="@+id/btn_nav_bills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_note"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Tagihan" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pelacak Tagihan Rutin (Bills)"
+                        android:textColor="@color/gray_800"
+                        android:textSize="@dimen/text_sm" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/gray_400"
+                        android:contentDescription="Next" />
+                </LinearLayout>
+
+                <!-- Goals Item -->
+                <LinearLayout
+                    android:id="@+id/btn_nav_goals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_bolt"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Target" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Target Finansial &amp; Tabungan"
+                        android:textColor="@color/gray_800"
+                        android:textSize="@dimen/text_sm" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/gray_400"
+                        android:contentDescription="Next" />
+                </LinearLayout>
+
+                <!-- Vault Item -->
+                <LinearLayout
+                    android:id="@+id/btn_nav_vault"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_document"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Vault" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Gudang Dokumen &amp; Bukti Struk"
+                        android:textColor="@color/gray_800"
+                        android:textSize="@dimen/text_sm" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/gray_400"
+                        android:contentDescription="Next" />
+                </LinearLayout>
+
+                <!-- Categories Item -->
+                <LinearLayout
+                    android:id="@+id/btn_nav_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_sm">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_category_default"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Kategori" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Kelola Kategori Transaksi"
+                        android:textColor="@color/gray_800"
+                        android:textSize="@dimen/text_sm" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/gray_400"
+                        android:contentDescription="Next" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Logout Button (Icon + Text) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logout"

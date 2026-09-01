@@ -29,6 +29,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void setupViews() {
+        // Schedule offline background workers
+        com.example.app_marifin_javadroid.core.worker.SyncQueueWorker.schedulePeriodicSync(this);
+        com.example.app_marifin_javadroid.core.worker.BudgetCheckWorker.schedulePeriodicCheck(this);
+
         if (getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment) == null) {
             loadFragment(new HomeFragment());
         }

@@ -84,7 +84,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         });
 
         binding.btnQuickFingpt.setOnClickListener(v -> {
-            showToast("FinGPT siap membantumu di Phase berikutnya!");
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.ai.FinGptActivity.class));
         });
 
         binding.btnManageAccounts.setOnClickListener(v -> {

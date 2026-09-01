@@ -34,6 +34,28 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
         binding.tvFullName.setText(sessionManager.getFullName().isEmpty() ? "Pengguna MariFin" : sessionManager.getFullName());
         binding.tvEmail.setText(sessionManager.getEmail() != null ? sessionManager.getEmail() : "user@email.com");
+        binding.tvAppVersion.setText("MariFin v2.0.0\nProduct by Mari Partner\nKelola Keuangan, Lebih Cerdas.");
+
+        // Feature Navigation
+        binding.btnNavReports.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.report.ReportActivity.class));
+        });
+
+        binding.btnNavBills.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.bill.BillListActivity.class));
+        });
+
+        binding.btnNavGoals.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.goal.GoalListActivity.class));
+        });
+
+        binding.btnNavVault.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.document.DocumentVaultActivity.class));
+        });
+
+        binding.btnNavCategories.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), com.example.app_marifin_javadroid.presentation.category.CategoryListActivity.class));
+        });
 
         binding.btnLogout.setOnClickListener(v -> {
             profileViewModel.logout();

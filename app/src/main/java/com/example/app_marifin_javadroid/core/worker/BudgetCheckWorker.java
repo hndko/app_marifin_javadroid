@@ -29,6 +29,20 @@ public class BudgetCheckWorker extends Worker {
 
     public static final String CHANNEL_ID = "marifin_budget_alerts";
     private static final String CHANNEL_NAME = "Peringatan Anggaran MariFin";
+    private static final String UNIQUE_WORK_NAME = "marifin_budget_check_work";
+
+    public static void schedulePeriodicCheck(@NonNull Context context) {
+        androidx.work.PeriodicWorkRequest checkRequest = new androidx.work.PeriodicWorkRequest.Builder(
+                BudgetCheckWorker.class,
+                6, java.util.concurrent.TimeUnit.HOURS
+        ).build();
+
+        androidx.work.WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                UNIQUE_WORK_NAME,
+                androidx.work.ExistingPeriodicWorkPolicy.KEEP,
+                checkRequest
+        );
+    }
 
     public BudgetCheckWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
