@@ -10,23 +10,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_xl"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingVertical="@dimen/spacing_xl"
         android:gravity="center_horizontal">
 
-        <!-- Top Header -->
+        <!-- Top Header with Brand Badge -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="@dimen/spacing_lg"
-            android:layout_marginBottom="@dimen/spacing_xl">
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_lg">
+
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_brand_logo_circle"
+                android:layout_marginBottom="@dimen/spacing_sm">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_wallet_card"
+                    app:tint="@color/white"
+                    android:contentDescription="@string/app_name" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="@dimen/text_3xl"
+                android:textSize="@dimen/text_2xl"
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/primary" />
 
@@ -34,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_tagline"
-                android:textSize="@dimen/text_sm"
+                android:textSize="@dimen/text_xs"
                 android:textColor="@color/gray_600"
-                android:layout_marginTop="@dimen/spacing_xs" />
+                android:layout_marginTop="@dimen/spacing_2xs" />
         </LinearLayout>
 
         <!-- Form Card -->
@@ -45,6 +61,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MariFin.CardView"
             app:cardElevation="@dimen/elevation_low"
+            app:cardCornerRadius="@dimen/radius_lg"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/divider"
             app:contentPadding="@dimen/spacing_xl">
 
             <LinearLayout
@@ -55,11 +74,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Buat Akun Baru"
-                    android:textSize="@dimen/text_xl"
-                    android:fontFamily="sans-serif-medium"
+                    android:text="Buat Akun Baru ✨"
+                    android:textSize="@dimen/text_lg"
+                    android:fontFamily="sans-serif-bold"
                     android:textColor="@color/on_surface"
-                    android:layout_marginBottom="@dimen/spacing_xs" />
+                    android:layout_marginBottom="@dimen/spacing_2xs" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,12 +88,21 @@
                     android:textColor="@color/gray_500"
                     android:layout_marginBottom="@dimen/spacing_lg" />
 
-                <!-- Full Name Input -->
+                <!-- Full Name Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_full_name"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_full_name"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_person"
                     android:layout_marginBottom="@dimen/spacing_md">
@@ -85,15 +113,25 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:hint="@string/placeholder_full_name"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Email Input -->
+                <!-- Email Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_email"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_email"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_email"
                     android:layout_marginBottom="@dimen/spacing_md">
@@ -104,15 +142,25 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:hint="@string/placeholder_email"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Password Input -->
+                <!-- Password Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_password"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_password"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:endIconMode="password_toggle"
@@ -124,15 +172,25 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="@string/placeholder_password"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Password Confirmation Input -->
+                <!-- Password Confirm Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Konfirmasi Password"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_password_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Konfirmasi Password"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:endIconMode="password_toggle"
@@ -144,16 +202,18 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="Ulangi password"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Register Button (Icon + Text) -->
+                <!-- Register Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_register"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:text="@string/action_register"
                     app:icon="@drawable/ic_add"
+                    app:cornerRadius="@dimen/radius_md"
                     style="@style/Widget.MariFin.Button" />
 
                 <!-- Loading Indicator -->
@@ -173,7 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginTop="@dimen/spacing_lg"
             android:layout_marginBottom="@dimen/spacing_xl">
 
             <TextView
@@ -189,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:text="Masuk"
                 android:textColor="@color/primary"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-bold"
                 android:textSize="@dimen/text_sm" />
         </LinearLayout>
 

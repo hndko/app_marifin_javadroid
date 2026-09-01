@@ -10,17 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_xl"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingVertical="@dimen/spacing_xl"
         android:gravity="center_horizontal">
 
-        <!-- Top Header / Branding -->
+        <!-- Top Header / Branding with Icon -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="@dimen/spacing_2xl"
-            android:layout_marginBottom="@dimen/spacing_2xl">
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_xl">
+
+            <FrameLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_brand_logo_circle"
+                android:layout_marginBottom="@dimen/spacing_md">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_wallet_card"
+                    app:tint="@color/white"
+                    android:contentDescription="@string/app_name" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_brand_name"
@@ -39,7 +55,7 @@
                 android:textSize="@dimen/text_sm"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/gray_600"
-                android:layout_marginTop="@dimen/spacing_xs" />
+                android:layout_marginTop="@dimen/spacing_2xs" />
         </LinearLayout>
 
         <!-- Form Card -->
@@ -48,6 +64,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MariFin.CardView"
             app:cardElevation="@dimen/elevation_low"
+            app:cardCornerRadius="@dimen/radius_lg"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/divider"
             app:contentPadding="@dimen/spacing_xl">
 
             <LinearLayout
@@ -58,11 +77,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selamat Datang Kembali"
-                    android:textSize="@dimen/text_xl"
-                    android:fontFamily="sans-serif-medium"
+                    android:text="Selamat Datang Kembali 👋"
+                    android:textSize="@dimen/text_lg"
+                    android:fontFamily="sans-serif-bold"
                     android:textColor="@color/on_surface"
-                    android:layout_marginBottom="@dimen/spacing_xs" />
+                    android:layout_marginBottom="@dimen/spacing_2xs" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -72,12 +91,22 @@
                     android:textColor="@color/gray_500"
                     android:layout_marginBottom="@dimen/spacing_lg" />
 
-                <!-- Email Input -->
+                <!-- Email Explicit Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_email"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <!-- Email Input (hintEnabled=false to prevent overlap bug) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_email"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_email"
                     android:layout_marginBottom="@dimen/spacing_md">
@@ -88,15 +117,26 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:hint="@string/placeholder_email"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Password Input -->
+                <!-- Password Explicit Top Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_password"
+                    android:textSize="@dimen/text_sm"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/gray_700"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <!-- Password Input (hintEnabled=false to prevent overlap bug) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_password"
+                    app:hintEnabled="false"
                     style="@style/Widget.MariFin.TextInputLayout"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:endIconMode="password_toggle"
@@ -108,6 +148,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="@string/placeholder_password"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_base" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,9 +169,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:text="@string/action_login"
-                    app:icon="@drawable/ic_check"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:cornerRadius="@dimen/radius_md"
                     style="@style/Widget.MariFin.Button" />
 
                 <!-- Loading Indicator -->
@@ -150,7 +192,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/spacing_xl">
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginBottom="@dimen/spacing_xl">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:text="Daftar Sekarang"
                 android:textColor="@color/primary"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif-bold"
                 android:textSize="@dimen/text_sm" />
         </LinearLayout>
 
