@@ -1,6 +1,6 @@
 # MariFin Engineering Rules & Architecture Guide
 
-> **Single Source of Truth** bagi AI Agent dan Developer dalam pengembangan aplikasi **MariFin** (*Kelola Keuangan, Lebih Cerdas*).
+> **Single Source of Truth** bagi AI Agent dan Developer dalam pengembangan dan pemeliharaan aplikasi **MariFin** (*Kelola Keuangan, Lebih Cerdas*).
 
 ---
 
@@ -16,108 +16,127 @@
 - **Architecture**: Clean Architecture + MVVM + Repository Pattern
 - **Cloud Backend**: Supabase (PostgreSQL with RLS, Supabase Auth, Supabase Storage, Edge Functions)
 - **Local Database**: Android Room Database (Offline Cache & Sync Queue)
+- **Background Engine**: Android WorkManager (Offline Sync Worker & Spending Alert Worker)
 - **Min SDK**: API 26 (Android 8.0 Oreo) | **Target & Compile SDK**: API 37
+- **Latest Stable Version**: `v2.0.0` (versionCode `11`)
 
 ---
 
 ## 2. Tech Stack & Libraries
 
-| Kategori | Teknologi / Library |
-| :--- | :--- |
-| **Language & Tooling** | Java 11, Android Gradle Plugin (AGP), Version Catalog (`libs.versions.toml`) |
-| **Architecture Components** | `ViewModel`, `LiveData`, `Navigation Component`, `ViewBinding` |
-| **Local Persistence** | `Room Database` (SQLite), `EncryptedSharedPreferences` (Android Keystore) |
-| **Networking & API** | `Retrofit 2`, `OkHttp 3` (Logging Interceptor), `Gson` |
-| **Data Visualization** | `MPAndroidChart` (Donut, Pie, Bar, Line Charts) |
-| **Background Tasks** | `WorkManager` (Offline synchronization & scheduled checks) |
-| **Image & Media** | `Glide` |
-| **Cloud Backend** | Supabase PostgreSQL, Supabase GoTrue Auth, Supabase Storage API |
-| **AI Integration** | Secure AI Proxy via Supabase Edge Function (FinGPT) |
-| **Testing** | JUnit 4, AndroidX Test, Espresso, Mockito |
+| Kategori | Teknologi / Library | Keterangan & Penggunaan |
+| :--- | :--- | :--- |
+| **Language & Tooling** | Java 11, Android Gradle Plugin (AGP), Version Catalog (`libs.versions.toml`) | Standar kompilasi Android Native |
+| **Architecture Components** | `ViewModel`, `LiveData`, `Navigation Component`, `ViewBinding` | Clean MVVM & Lifecycle-aware |
+| **Local Persistence** | `Room Database` (SQLite), `EncryptedSharedPreferences` (Android Keystore) | Offline-First Cache & Secure Token Storage |
+| **Networking & API** | `Retrofit 2`, `OkHttp 3` (Logging Interceptor), `Gson` | Komunikasi RESTful ke Supabase PostgREST & Auth |
+| **Data Visualization** | `MPAndroidChart` (Donut Chart, 6-Month Bar Chart) | Grafik analitik pengeluaran & arus kas |
+| **Background Tasks** | `WorkManager` (`SyncQueueWorker`, `BudgetCheckWorker`) | Sinkronisasi antrean offline & notifikasi berkala |
+| **Image & Media** | `Glide` | Rendering dokumen & avatar pengguna |
+| **Cloud Backend** | Supabase PostgreSQL, Supabase GoTrue Auth, Supabase Storage API | Backend serverless dengan RLS aktif |
+| **AI Integration** | Secure AI Proxy & Smart Transaction Parser (FinGPT) | Parsing pesan mutasi & asisten finansial cerdas |
+| **Testing** | JUnit 4, AndroidX Test, Espresso, Mockito | Pengujian unit kalkulasi domain & use cases |
 
 ---
 
 ## 3. Architecture & Layering
 
-Aplikasi mengadopsi prinsip **Clean MVVM (Model-View-ViewModel)** dengan pemisahan tanggung jawab yang ketat:
+Aplikasi mengadopsi prinsip **Clean MVVM (Model-View-ViewModel)** dengan pemisahan dependensi modular:
 
-```
+```text
 app/src/main/java/com/example/app_marifin_javadroid/
 │
 ├── core/
 │   ├── base/               # BaseActivity, BaseFragment, BaseViewModel
 │   ├── common/             # Resource<T> state wrapper (Loading, Success, Error, Empty)
-│   ├── security/           # SecureSessionManager, Keystore helpers
+│   ├── security/           # SecureSessionManager (Keystore MasterKey)
 │   ├── network/            # NetworkCallback, ConnectivityMonitor
-│   └── utils/              # CurrencyHelper (IDR), DateHelper, DebounceHelper, Validator
+│   ├── utils/              # CurrencyHelper (IDR), DateHelper, DebounceHelper, Validator, CsvExportHelper
+│   └── worker/             # SyncQueueWorker (Offline Sync), BudgetCheckWorker (Alerts)
 │
 ├── data/
 │   ├── local/
-│   │   ├── dao/            # AccountDao, TransactionDao, CategoryDao, BudgetDao, BillDao, GoalDao
-│   │   ├── entity/         # AccountEntity, TransactionEntity, CategoryEntity, etc.
-│   │   ├── converters/     # BigDecimal, Date, UUID Room converters
-│   │   └── AppDatabase.java# Room Database singleton
+│   │   ├── dao/            # AccountDao, TransactionDao, CategoryDao, BudgetDao, BillDao, GoalDao, DocumentDao, SyncQueueDao
+│   │   ├── entity/         # 10 Room Entities (Account, Transaction, Category, Budget, Bill, Goal, Document, etc.)
+│   │   ├── converters/     # BigDecimal, Date, UUID Room Type Converters
+│   │   ├── model/          # BudgetWithProgress, CategoryExpenseAggregate, MonthlyExpenseAggregate
+│   │   └── AppDatabase.java# Room Database singleton & automatic category seeder
 │   ├── remote/
-│   │   ├── api/            # Supabase API services (Auth, PostgREST, Storage, Functions)
-│   │   ├── dto/            # Data Transfer Objects
+│   │   ├── api/            # SupabaseAuthApi, SupabaseDataApi, RetrofitClient
+│   │   ├── dto/            # Data Transfer Objects (AccountDto, TransactionDto, BillDto, GoalDto, etc.)
 │   │   └── mapper/         # DTO <-> Entity <-> Domain mappers
-│   └── repository/         # Repository implementations (Coordinating Room + Supabase)
+│   └── repository/         # Repository implementations (Coordinating Room Cache + Supabase Sync)
 │
 ├── domain/
-│   ├── model/              # Pure Domain models (Account, Transaction, Budget, Bill, Goal, Category)
-│   ├── repository/         # Domain Repository interfaces
-│   └── usecase/            # Business logic (CalculateCashFlow, ExecuteTransfer, CheckBudgetAlert)
+│   ├── model/              # Pure Domain models (ChatMessage, DraftTransaction, FinancialReportData)
+│   └── usecase/            # CalculateCashFlow, CalculateBudgetUtilization, CalculateGoalProgress, 
+│                           # GenerateFinancialReport, SmartTransactionParser, FinGptAdvisor
 │
 └── presentation/
     ├── auth/               # Login, Register, ForgotPassword, Onboarding
-    ├── home/               # Beranda, Financial Summary, Horizontal Account Carousel
-    ├── transaction/        # Transaction List, Filter, Add/Edit/Detail Transaction
+    ├── home/               # Beranda, Financial Summary, Horizontal Account Carousel, Quick Actions
+    ├── transaction/        # Transaction List, Filter, Add/Edit/Detail Transaction BottomSheet
     ├── expense/            # Expense Dashboard, 6-Month Bar Chart, Category Donut Chart
-    ├── budget/             # Budget List, Add/Edit Budget, Progress Bar Utilization
-    ├── bill/               # Tagihan / Bills List, Due Reminder, Pay Bill
-    ├── goal/               # Financial Goals, Contribution Tracker
-    ├── report/             # Financial Reports (Monthly, Weekly, Yearly, Custom tabs)
-    ├── document/           # Document List, Drag & Drop Upload Component, Viewer
-    ├── ai/                 # FinGPT Chat, AI Transaction Parser Dialog (Draft Preview & Confirm)
-    └── profile/            # Profile, Security, Currency/Timezone Preferences, Logout
+    ├── budget/             # Budget List, Add/Edit Budget Modal, 4-Zone Progress Bar Utilization
+    ├── bill/               # Pelacak Tagihan Rutin, Due Reminder, Pay Bill Dialog (Atomic mutation)
+    ├── goal/               # Financial Goals, Contribution Tracker, Contribute Dialog (Atomic mutation)
+    ├── report/             # Financial Reports (Monthly, Weekly, Yearly), CSV Export via Share Sheet
+    ├── document/           # Document Vault, Drag & Drop Upload Component, Secure Preview
+    ├── ai/                 # FinGPT Chatbot, Smart NLP Transaction Parser, Draft Preview Confirmation Modal
+    ├── profile/            # Profile, Security, Preferences, Feature Shortcuts, Logout
+    └── main/               # MainActivity (BottomNavigationView 5 destinasi & worker scheduler)
 ```
 
 ---
 
-## 4. Database Rules
+## 4. Database Rules & Offline-First Strategy
 
 ### 4.1. Local Database (Room)
-1. Seluruh operasi database **WAJIB** dijalankan di background thread (menggunakan `Executors` atau `CompletableFuture`), **DILARANG** melakukan query Room di UI/Main thread.
-2. Seluruh foreign key harus dideklarasikan secara eksplisit dengan cascading rules yang aman.
-3. Terapkan indeks pada kolom yang sering difilter atau diurutkan: `user_id`, `transaction_date`, `type`, `category_id`, `account_id`.
-4. Operasi multi-tabel (seperti transfer rekening yang mengurangi saldo sumber dan menambah saldo tujuan) **WAJIB** menggunakan anotasi `@Transaction`.
+1. **Background Thread Mandatory**: Seluruh operasi database **WAJIB** dijalankan di background thread (menggunakan `Executors` atau `CompletableFuture`), **DILARANG KERAS** melakukan query Room di UI/Main thread.
+2. **Foreign Key & Cascading**: Seluruh relasi foreign key harus dideklarasikan secara eksplisit dengan cascading rules yang aman.
+3. **Database Indexing**: Terapkan indeks pada kolom yang sering difilter atau diurutkan: `user_id`, `transaction_date`, `type`, `category_id`, `account_id`, `created_at`.
+4. **Atomic Multi-Table Mutation**: Operasi multi-tabel (seperti transfer rekening, pembayaran tagihan, atau setoran target tabungan) **WAJIB** menggunakan anotasi `@Transaction` pada DAO.
 
 ### 4.2. Cloud Database (Supabase PostgreSQL)
-1. **Row Level Security (RLS)** wajib aktif di seluruh tabel dengan policy: `auth.uid() = user_id`.
-2. Default categories bersifat *read-only* bagi authenticated users (`is_default = true`), sedangkan custom categories hanya dapat diakses oleh pembuatnya.
-3. Seluruh tabel wajib memiliki kolom audit: `created_at` dan `updated_at`.
+1. **Row Level Security (RLS)**: Wajib aktif di seluruh tabel publik dengan policy isolasi data pengguna:
+   ```sql
+   CREATE POLICY "Users can only access their own data"
+   ON public.<table_name> FOR ALL
+   USING (auth.uid() = user_id);
+   ```
+2. **Default vs Custom Categories**: Default categories bersifat *read-only* bagi authenticated users (`is_default = true`), sedangkan custom categories hanya dapat diakses dan diubah oleh pembuatnya.
+3. **Audit Columns & Triggers**: Seluruh tabel wajib memiliki kolom `created_at` dan `updated_at` yang di-update otomatis oleh trigger PostgreSQL.
+
+### 4.3. Offline-First Sync Queue Worker (`SyncQueueWorker`)
+1. Jika koneksi internet terputus saat user menambah/mengubah/menghapus data, mutasi dicatat ke dalam tabel lokal `sync_queue` (`SyncQueueEntity`).
+2. `SyncQueueWorker` didaftarkan pada `WorkManager` dengan batasan `NetworkType.CONNECTED`.
+3. Ketika perangkat kembali online, worker memproses batch mutasi (maks. 30 item) ke Supabase PostgREST.
+4. Item yang berhasil dikirim dihapus dari antrean; item yang gagal memiliki batas toleransi `retry_count <= 5` sebelum di-drop guna mencegah *queue deadlock*.
 
 ---
 
 ## 5. Financial Domain & Monetary Precision Rules
 
 1. **Anti-Floating Point Corruption**:
-   - **DILARANG KERAS** menggunakan `float` atau `double` untuk nominal uang.
-   - Gunakan `BigDecimal` di Java/Domain/Entity dan `NUMERIC(15,2)` / `BIGINT` di database PostgreSQL & SQLite.
-2. **Kategori & Karakteristik Transaksi**:
-   - **Pemasukan (Income)**: Menambah saldo akun (`balance += amount`). Dihitung ke Total Income.
-   - **Pengeluaran (Expense)**: Mengurangi saldo akun (`balance -= amount`). Dihitung ke Total Expense.
-   - **Transfer**: Mengurangi saldo akun asal dan menambah saldo akun tujuan. **TIDAK BOLEH** dihitung sebagai Income ataupun Expense pada laporan arus kas (*Net Cash Flow*).
+   - **DILARANG KERAS** menggunakan tipe data `float` atau `double` untuk nominal uang di Java, Domain, ViewModel, maupun Entity.
+   - Gunakan `BigDecimal` di Java/Room dan `NUMERIC(15,2)` / `BIGINT` di database PostgreSQL.
+2. **Karakteristik Mutasi Keuangan**:
+   - **Pemasukan (Income)**: Menambah saldo rekening (`balance += amount`). Dihitung ke Total Income.
+   - **Pengeluaran (Expense)**: Mengurangi saldo rekening (`balance -= amount`). Dihitung ke Total Expense.
+   - **Transfer Antar-Rekening**: Mengurangi saldo akun asal dan menambah saldo akun tujuan. **TIDAK BOLEH** dihitung sebagai Income ataupun Expense pada laporan arus kas (*Net Cash Flow*).
    - **Net Cash Flow** = `Total Income - Total Expense`.
-3. **Idempotency & Concurrency**:
-   - Setiap operasi transfer memiliki `transfer_group_id` / `reference_id` unik untuk mencegah mutasi ganda.
+3. **Sistem 4-Zona Peringatan Anggaran (Budget 4-Zone Alert)**:
+   - 🟢 **Aman (*SAFE*)**: Pengeluaran `< 70%` dari limit.
+   - 🟡 **Waspada (*WARNING*)**: Pengeluaran `70% – 89%` dari limit.
+   - 🟠 **Kritis (*DANGER*)**: Pengeluaran `90% – 99%` dari limit.
+   - 🔴 **Over Budget (*OVER_BUDGET*)**: Pengeluaran `≥ 100%` dari limit. Memicu notifikasi lokal via `BudgetCheckWorker`.
 
 ---
 
 ## 6. UI/UX & Form Rules
 
 1. **Design Theme**:
-   - Warna utama adalah **MariFin Blue** (`#1E56A0` / `#1665D8`), didukung Accent Blue (`#3AB4F2`), Success Green (`#10B981`), Danger Red (`#EF4444`), dan Card Background White/Neutral (`#FFFFFF` / `#F8FAFC`).
+   - Warna utama adalah **MariFin Blue** (`#1E56A0` / `#1665D8`), didukung Accent Blue (`#3AB4F2`), Success Green (`#10B981`), Danger Red (`#EF4444`), dan Background Neutral (`#FFFFFF` / `#F8FAFC`).
    - Gunakan Card-based UI dengan rounded corner standar (12dp–16dp) dan elevasi halus.
 2. **Form Standards**:
    - Setiap input field **WAJIB** memiliki: **Label + Icon + Placeholder + Error/Validation State**.
@@ -135,47 +154,46 @@ app/src/main/java/com/example/app_marifin_javadroid/
 
 ---
 
-## 7. Security Rules
+## 7. Security & Cloud Storage Rules
 
 1. **Zero Secret Leakage**:
    - **DILARANG KERAS** menyimpan API Key AI, Supabase Service Role Key, atau password di source code Android.
-   - Kunci publik / anon key dimuat melalui `BuildConfig` dari `local.properties`.
+   - Kunci publik `SUPABASE_ANON_KEY` dan `SUPABASE_URL` wajib dimuat melalui `BuildConfig` dari `local.properties`.
 2. **Secure Token Storage**:
-   - Simpan session token Supabase menggunakan `EncryptedSharedPreferences` dengan master key dari Android Keystore.
+   - Simpan session token Supabase menggunakan `EncryptedSharedPreferences` dengan master key dari Android Keystore (`SecureSessionManager`).
 3. **Secure AI Flow (FinGPT)**:
-   - Request AI dialirkan melalui secure backend / Edge Function proxy.
-   - **AI TIDAK BOLEH** langsung menyimpan transaksi ke database tanpa persetujuan user. AI wajib menghasilkan **Draft Transaction Preview** yang harus dikonfirmasi manual oleh user (*Confirm / Edit*).
-4. **File Validation**:
-   - Validasi MIME type, ukuran file maksimal (5MB), dan sanitasi nama file sebelum diunggah ke storage.
+   - Request AI dialirkan melalui parser dan secure proxy.
+   - **AI TIDAK BOLEH** langsung menyimpan transaksi ke database tanpa persetujuan user. AI wajib menghasilkan **Draft Transaction Preview** yang harus dikonfirmasi manual oleh user (*Confirm / Edit* via `DraftTransactionPreviewDialog`).
+4. **Supabase Storage Rules (Receipts Vault)**:
+   - **Bucket Name**: Wajib menggunakan nama `documents`.
+   - **Private Bucket**: Toggle `public` wajib **OFF / Nonaktif** guna melindungi kerahasiaan dokumen/rekening koran user.
+   - **Dual-Layer Validation**:
+     - *Client-Side*: Validasi MIME type (`image/jpeg`, `image/png`, `application/pdf`), batas ukuran maks 5MB (`5242880` bytes), dan sanitasi nama berkas di `DocumentRepository`.
+     - *Server-Side*: Konfigurasi `Restrict file size = 5MB` dan `Restrict MIME types` pada Supabase Storage.
 
 ---
 
-## 8. Performance Rules
+## 8. Documentation Standards
 
-1. **Debounce Mechanism**:
-   - Seluruh live search, filter text, dan autocomplete input wajib menggunakan debounce (300–500ms).
-2. **Pagination & Lazy Loading**:
-   - Transaction list dan report lists wajib menerapkan pagination (batch 20–30 item) untuk menghemat memori.
-3. **Database Indexing & Optimized Aggregation**:
-   - Penghitungan total dan aggregasi bulanan dilakukan via database aggregation SQL, bukan me-loop ribuan objek di Java.
-
----
-
-## 9. Testing & Code Quality Rules
-
-1. **Unit Testing**:
-   - Seluruh logika kalkulasi finansial (`CurrencyHelper`, `DateHelper`, `CalculateCashFlow`, `BudgetUtilization`) **WAJIB** memiliki Unit Test komprehensif (Happy path, Zero value, Negative value, Large amount).
-2. **Clean Code**:
-   - Terapkan prinsip Single Responsibility. Activity/Fragment hanya mengurus rendering UI dan delegasi event ke ViewModel.
-   - Tidak ada duplikasi kode logika bisnis, tidak ada magic string/number (gunakan Enum dan Constants).
+1. **README.md Standar**:
+   - Judul Heading 1 (`#`) dengan deskripsi satu kalimat dan *badges* resmi.
+   - Daftar Isi (*Table of Contents*) dengan anchor links.
+   - Penjelasan Masalah & Fitur Utama.
+   - Prasyarat, Instalasi langkah-demi-langkah (blok terminal), dan Panduan Penggunaan.
+   - Pohon direktori arsitektur Clean MVVM.
+   - Panduan Kontribusi (*Conventional Commits*) dan Lisensi MIT.
+2. **Setup Guides (`docs/PANDUAN_SETUP.md`)**:
+   - Panduan konfigurasi Supabase (Auth, DDL Skema, RLS, Storage Bucket, local.properties).
+   - Skema database tersimpan di [`docs/database/supabase_schema.sql`](file:///c:/Users/Kyoo/AndroidStudioProjects/app_marifin_javadroid/docs/database/supabase_schema.sql).
+   - Aset banner tersimpan di `docs/assets/`.
 
 ---
 
-## 10. Git Rules & Semantic Commit Messages
+## 9. Git Rules & Semantic Commit Messages
 
 Setiap kali menyelesaikan suatu task, sub-task, atau phase yang diminta oleh user, agen **WAJIB** melakukan update versioning (jika berlaku) lalu menjalankan **Git Commit & Push** secara otomatis dengan format **Semantic Commit Messages (Conventional Commits)**.
 
-### 10.1. Format Commit
+### 9.1. Format Commit
 ```text
 <type>(<scope>): <short description in imperative mood, lowercase, <= 50 chars>
 
@@ -184,68 +202,33 @@ Setiap kali menyelesaikan suatu task, sub-task, atau phase yang diminta oleh use
 [optional footer(s), e.g. BREAKING CHANGE: description]
 ```
 
-### 10.2. Daftar Tipe Utama
-- `feat`: Menambah fitur baru aplikasi.
-  - *Contoh*: `feat(auth): tambah validasi nomor telepon saat registrasi`
-- `fix`: Memperbaiki bug atau kesalahan kode.
-  - *Contoh*: `fix(api): perbaiki error 500 saat token kedaluwarsa`
-- `docs`: Mengubah atau menambah dokumentasi saja (`README.md`, `AGENTS.md`, PRD).
-  - *Contoh*: `docs(agents): buat engineering rules dan panduan semver`
-- `style`: Mengubah format kode tanpa mengubah logika (spasi, indentasi, resource XML layout cleanup).
-  - *Contoh*: `style(nav): rapikan padding dan icon bottom navigation`
-- `refactor`: Mengubah kode untuk peningkatan struktur internal (bukan perbaikan bug atau fitur baru).
-  - *Contoh*: `refactor(account): pisahkan kalkulasi saldo ke usecase`
-- `perf`: Mengubah kode khusus untuk meningkatkan performa.
-  - *Contoh*: `perf(report): optimasikan query aggregasi pengeluaran`
-- `test`: Menambah atau memperbaiki kode pengujian (Unit / Instrumented Test).
-  - *Contoh*: `test(transaction): tambah skenario uji transfer antar rekening`
-- `chore`: Mengubah konfigurasi build tool, Gradle dependencies, atau environment.
-  - *Contoh*: `chore(deps): tambah room dan navigation component`
-- `ci`: Mengubah berkas konfigurasi CI/CD workflows.
-  - *Contoh*: `ci(build): tambah tahap verifikasi build otomatis`
-
-### 10.3. Aturan Penulisan
-- **Huruf kecil**: Tipe dan deskripsi singkat wajib huruf kecil.
-- **Kalimat perintah/singkat**: Gunakan kata kerja imperatif (`tambah`, `perbaiki`, `optimasi`, bukan `menambahkan` / `diperbaiki`).
-- **Batas karakter**: Baris judul tidak lebih dari 50–72 karakter.
-- **Breaking Change**: Gunakan tanda seru `!` setelah tipe/scope (contoh: `feat(database)!: ubah skema relasi akun`) atau cantumkan `BREAKING CHANGE:` di footer.
+### 9.2. Daftar Tipe Utama
+- `feat`: Menambah fitur baru aplikasi (*contoh: `feat(ai-fingpt): implementasikan smart transaction parser`*).
+- `fix`: Memperbaiki bug atau kesalahan kode (*contoh: `fix(auth): perbaiki error 500 saat token kedaluwarsa`*).
+- `docs`: Mengubah atau menambah dokumentasi saja (*contoh: `docs(guide): tambah panduan setup supabase`*).
+- `style`: Mengubah format kode tanpa mengubah logika (*contoh: `style(nav): rapikan padding bottom navigation`*).
+- `refactor`: Mengubah kode untuk peningkatan struktur internal (*contoh: `refactor(account): pisahkan kalkulasi saldo ke usecase`*).
+- `perf`: Mengubah kode khusus untuk meningkatkan performa (*contoh: `perf(report): optimasikan query aggregasi pengeluaran`*).
+- `test`: Menambah atau memperbaiki kode pengujian (*contoh: `test(sync): tambah unit test sync queue entity`*).
+- `chore`: Mengubah konfigurasi build tool atau dependensi (*contoh: `chore(deps): tambah workmanager runtime`*).
 
 ---
 
-## 11. Semantic Versioning (SemVer) & App Version Bump
+## 10. Semantic Versioning (SemVer) & App Version Bump
 
 Setiap perilisan fitur atau pembaruan yang mengubah kode aplikasi, nomor versi pada `app/build.gradle` (dan version catalog jika relevan) **WAJIB** dinaikkan secara terstruktur mengikuti format:
 
 $$\text{MAJOR}.\text{MINOR}.\text{PATCH}$$
 
-### 11.1. Aturan Penomoran
-1. **MAJOR (X.0.0)**:
-   - Naikkan angka MAJOR ketika ada perubahan arsitektur besar atau perubahan skema/API yang merusak kompatibilitas lama (*Breaking Change*).
-   - `versionCode` bertambah `+1`, `versionName` berubah misal `1.0.0` $\rightarrow$ `2.0.0`.
-2. **MINOR (x.Y.0)**:
-   - Naikkan angka MINOR ketika menambah fitur baru yang tetap kompatibel dengan versi sebelumnya (`feat`).
-   - `versionCode` bertambah `+1`, `versionName` berubah misal `1.0.0` $\rightarrow$ `1.1.0`.
-3. **PATCH (x.y.Z)**:
-   - Naikkan angka PATCH ketika hanya memperbaiki bug (`fix`), perbaikan performa kecil (`perf`), atau perbaikan formatting/dokumentasi/refactor kecil.
-   - `versionCode` bertambah `+1`, `versionName` berubah misal `1.1.0` $\rightarrow$ `1.1.1`.
-
-### 11.2. Lokasi Konfigurasi Versi
-Di [app/build.gradle](file:///c:/Users/Kyoo/AndroidStudioProjects/app_marifin_javadroid/app/build.gradle):
-```groovy
-defaultConfig {
-    applicationId "com.example.app_marifin_javadroid"
-    minSdk 26
-    targetSdk 37
-    versionCode 1       // Naikkan +1 pada setiap perubahan rilis
-    versionName "1.0.0" // Format SemVer MAJOR.MINOR.PATCH
-}
-```
+1. **MAJOR (X.0.0)**: Perubahan arsitektur besar / rilis stabil utama (*Breaking Changes* / Rilis Versi 2.0.0).
+2. **MINOR (x.Y.0)**: Penambahan fitur baru yang tetap kompatibel dengan versi sebelumnya (`feat`).
+3. **PATCH (x.y.Z)**: Perbaikan bug (`fix`), dokumentasi (`docs`), atau refactor kecil.
 
 ---
 
-## 12. Development Workflow (Step-by-Step)
+## 11. Development Workflow (Step-by-Step)
 
-```
+```text
 1. Terima Instruksi Phase/Task dari User
    ↓
 2. Tampilkan Objective, Requirement, Database & File Changes Plan
@@ -254,7 +237,7 @@ defaultConfig {
    ↓
 4. Implementasikan Kode (Sesuai Clean Architecture & Rules)
    ↓
-5. Jalankan Unit Test & Build Verification
+5. Jalankan Unit Test & Build Verification (.\gradlew.bat test)
    ↓
 6. Naikkan Versioning Aplikasi (SemVer di app/build.gradle)
    ↓
@@ -265,27 +248,7 @@ defaultConfig {
 
 ---
 
-## 13. Do & Don't
-
-### DO:
-- ✅ Selalu gunakan `BigDecimal` untuk operasi nominal uang.
-- ✅ Pastikan setiap form memiliki label, icon, placeholder, dan validasi jelas.
-- ✅ Sediakan Empty State yang ramah dan informatif dengan CTA button.
-- ✅ Jalankan query database di background thread.
-- ✅ Mintalah konfirmasi user sebelum menyimpan data transaksi yang di-generate AI.
-- ✅ Gunakan Semantic Commit Messages dan naikkan SemVer secara konsisten.
-
-### DON'T:
-- ❌ JANGAN gunakan `float` atau `double` untuk nominal uang.
-- ❌ JANGAN hardcode API Key rahasia di source code Android.
-- ❌ JANGAN biarkan AI menyimpan transaksi langsung tanpa konfirmasi preview.
-- ❌ JANGAN masukkan logika bisnis berat di dalam Activity / Fragment.
-- ❌ JANGAN hitung transfer rekening sebagai pemasukan atau pengeluaran.
-- ❌ JANGAN melakukan push atau commit dengan pesan sembarangan tanpa semantic format.
-
----
-
-## 14. Definition of Done (DoD)
+## 12. Definition of Done (DoD)
 
 Sebuah task/phase hanya dinyatakan **SELESAI** jika memenuhi kriteria:
 
@@ -293,8 +256,8 @@ Sebuah task/phase hanya dinyatakan **SELESAI** jika memenuhi kriteria:
 - [ ] Struktur folder dan kode mematuhi Clean MVVM dan kaidah Java 11.
 - [ ] Desain UI/XML mematuhi Material Design 3 dan palet warna resmi MariFin.
 - [ ] State Loading, Empty State, Error State, dan Validation tersedia.
-- [ ] Kalkulasi finansial presisi tanpa floating-point bug.
+- [ ] Kalkulasi finansial presisi tanpa floating-point bug (`BigDecimal`).
 - [ ] Unit Test untuk logika domain/utility telah dibuat dan lulus (*Passed*).
-- [ ] Keamanan (RLS, API Key isolation, Input sanitization) telah terverifikasi.
+- [ ] Keamanan (RLS, API Key isolation, Input sanitization, Private Storage Bucket) telah terverifikasi.
 - [ ] Versi aplikasi (`versionCode` dan `versionName`) telah diperbarui sesuai SemVer.
 - [ ] Kode telah di-commit dengan Semantic Commit Message dan di-push ke remote repository.
